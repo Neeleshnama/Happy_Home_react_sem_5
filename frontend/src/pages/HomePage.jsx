@@ -8,19 +8,73 @@ import Events from "../components/Events/Events";
 import Sponsored from "../components/Route/Sponsored";
 import Footer from "../components/Layout/Footer";
 import PlayerComponent from '../components/PlayerComponent'
+import { useEffect, useRef, useState } from "react";
+import Slide from 'react-reveal/Slide';
+import { Fade, Rotate } from 'react-reveal';
 
+
+const RevealOnScroll = ({ children }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+      const scrollObserver = new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) {
+              setIsVisible(true);
+              scrollObserver.unobserve(entry.target);
+          }
+      });
+
+      scrollObserver.observe(ref.current);
+
+      return () => {
+          if (ref.current) {
+              scrollObserver.unobserve(ref.current);
+          }
+      };
+  }, []);
+
+  const classes = `transition-opacity duration-2000 
+      ${isVisible ? "opacity-100" : "opacity-0"
+      }`;
+
+  return (
+      <div ref={ref} className={classes}>
+          {children}
+      </div>
+  );
+};
 const HomePage = () => {
   return (
     <div>
         <Header activeHeading={1} />
+        <RevealOnScroll>
+        <Rotate>
         <Hero />
-       <PlayerComponent/>
+        </Rotate>
+        </RevealOnScroll>
+        <Slide right>
+       <RevealOnScroll>
         <Categories />
-        <BestDeals />
+        </RevealOnScroll>
+        </Slide>
+        
+
+        <RevealOnScroll>
+           <BestDeals />
+           </RevealOnScroll>
+           <RevealOnScroll>
         <Events />
+        </RevealOnScroll>
+        <RevealOnScroll>
         <FeaturedProduct />
+        </RevealOnScroll>
+        <RevealOnScroll>
         <Sponsored />
+        </RevealOnScroll>
+        <RevealOnScroll>
         <Footer />
+        </RevealOnScroll>
     </div>
   )
 }
