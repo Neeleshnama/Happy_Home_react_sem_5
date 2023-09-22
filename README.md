@@ -1,4 +1,4 @@
-@copyright by neelesh 2023
+@copyright by group 30 2023
 
 first run the socket connection
 
