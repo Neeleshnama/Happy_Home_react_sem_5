@@ -9,6 +9,10 @@
 *{
   scroll-behavior: smooth;
 }
+.text-black {
+  --mdb-text-opacity: 1;
+  color: rgba(var(--mdb-white-rgb), var(--mdb-text-opacity)) !important;
+}
 .overflow-hidden :hover{
   background-color: rgb(107, 106, 104);
   color: #F6F6F5;
@@ -30,7 +34,8 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; */
     font-family: cursive;
     font-weight: bolder;
-    background: #F6F6F5;
+    background: #161615;
+    background-color: #161615 !important;
     /* background-color: white; */
     scroll-behavior: smooth;
 }
@@ -56,7 +61,11 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
+h1{
+  margin: 0px !important;
+  font-weight: bolder !important;
+  font-size: inherit !important;
+}
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;

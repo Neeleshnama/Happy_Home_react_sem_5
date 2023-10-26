@@ -24,7 +24,7 @@ const Cart = ({ setOpenCart }) => {
   const quantityChangeHandler = (data) => {
     dispatch(addTocart(data));
   };
-
+ 
   return (
     <div className="fixed top-0 left-0 w-full bg-[#0000004b] h-screen z-10">
       <div className="fixed top-0 right-0 h-full w-[80%] 800px:w-[25%] bg-white flex flex-col overflow-y-scroll justify-between shadow-sm">
@@ -79,7 +79,7 @@ const Cart = ({ setOpenCart }) => {
                   className={`h-[45px] flex items-center justify-center w-[100%] bg-[#e44343] rounded-[5px]`}
                 >
                   <h1 className="text-[#fff] text-[18px] font-[600]">
-                    Book Now (USD${totalPrice})
+                    Book Now ₹{totalPrice}
                   </h1>
                 </div>
               </Link>
@@ -140,7 +140,7 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
             ${data.discountPrice} * {value}
           </h4>
           <h4 className="font-[600] text-[17px] pt-[3px] text-[#d02222] font-Roboto">
-            US${totalPrice}
+            ₹{totalPrice}
           </h4>
         </div>
         <RxCross1

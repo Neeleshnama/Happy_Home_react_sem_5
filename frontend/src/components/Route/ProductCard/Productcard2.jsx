@@ -1,14 +1,4 @@
-import react , { useState } from "react";
-import "./styleproduct.css";
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBIcon,
-} from "mdb-react-ui-kit";
+import React, { useState } from "react";
 import {
   AiFillHeart,
   AiFillStar,
@@ -29,6 +19,7 @@ import { useEffect } from "react";
 import { addTocart } from "../../../redux/actions/cart";
 import { toast } from "react-toastify";
 import Ratings from "../../Products/Ratings";
+
 const ProductCard = ({ data,isEvent }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const { cart } = useSelector((state) => state.cart);
@@ -71,23 +62,47 @@ const ProductCard = ({ data,isEvent }) => {
 
   return (
     <>
-     {/* //write for new product card */}
-     <MDBContainer fluid className="my-5">
-    <MDBRow>
-      <MDBCol md="12" lg="4" className="mb-4 mb-lg-0">
-        <MDBCard>
-          <div className="d-flex justify-content-between p-3">
-            <p className="lead mb-0"> Combo Offer</p>
-            <div
-              className="bg-black rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
-              style={{ width: "35px", height: "35px" }}
-            >
-              <p className="text-white mb-0 small">new</p>
-              
+      <div className="w-full h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
+        <div className="flex justify-end"></div>
+        <Link to={`${isEvent === true ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`}`}>
+          <img
+            src={`${data.images && data.images[0]?.url}`}
+            alt=""
+            className="w-full h-[170px] object-contain"
+          />
+        </Link>
+        <Link to={`/shop/preview/${data?.shop._id}`}>
+          <h5 className={`${styles.shop_name}`}>{data.shop.name}</h5>
+        </Link>
+        <Link to={`${isEvent === true ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`}`}>
+          <h4 className="pb-3 font-[500]">
+            {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
+          </h4>
+
+          <div className="flex">
+          <Ratings rating={data?.ratings} />
+          </div>
+
+          <div className="py-2 flex items-center justify-between">
+            <div className="flex">
+              <h5 className={`${styles.productDiscountPrice}`}>
+                {data.originalPrice === 0
+                  ? data.originalPrice
+                  : data.discountPrice}
+                $
+              </h5>
+              <h4 className={`${styles.price}`}>
+                {data.originalPrice ? data.originalPrice + " $" : null}
+              </h4>
             </div>
-           
-            {/* // wishlist item */}
-            <div>
+            <span className="font-[400] text-[17px] text-[#68d284]">
+              {data?.sold_out} sold
+            </span>
+          </div>
+        </Link>
+
+        {/* side options */}
+        <div>
           {click ? (
             <AiFillHeart
               size={22}
@@ -105,70 +120,23 @@ const ProductCard = ({ data,isEvent }) => {
               title="Add to wishlist"
             />
           )}
-          {/* <AiOutlineEye
+          <AiOutlineEye
             size={22}
             className="cursor-pointer absolute right-2 top-14"
             onClick={() => setOpen(!open)}
             color="#333"
             title="Quick view"
-          /> */}
+          />
           <AiOutlineShoppingCart
             size={25}
-            className="cursor-pointer absolute right-2 top-14"
+            className="cursor-pointer absolute right-2 top-24"
             onClick={() => addToCartHandler(data._id)}
-            color="#FF0000"
+            color="#444"
             title="Add to cart"
           />
           {open ? <ProductDetailsCard setOpen={setOpen} data={data} /> : null}
         </div>
-          </div>
-          <Link to={`${isEvent === true ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`}`}>
-          <img
-            src={`${data.images && data.images[0]?.url}`}
-            alt=""
-            className="w-full h-[170px] object-contain"
-          />
-        </Link>
-          <MDBCardBody>
-            <div className="d-flex justify-content-between">
-              <p className="small">
-              <Link to={`/shop/preview/${data?.shop._id}`}>
-        <h5 className="text-muted">{data.shop.name}</h5>
-      </Link>
-              </p>
-              <p className="small text-danger">
-                <s>  {data.originalPrice ? data.originalPrice + "₹" : null}</s>
-              </p>
-            </div>
-
-            <div className="d-flex justify-content-between mb-3">
-            <h4 className="pb-3 font-[500]">
-          {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
-        </h4>
-              <h4 >
-              ₹{data.originalPrice === 0
-                  ? data.originalPrice
-                  : data.discountPrice}
-               
-            </h4>
-            </div>
-
-            <div class="d-flex justify-content-between mb-2">
-              <p class="text-muted mb-0 text-green">
-               slots: <span class="fw-bold text-danger"> <br /> {data?.sold_out*(-1) }  booked</span>
-              </p>
-              <div class="ms-auto text-warning">
-              <Ratings rating={data?.ratings} />
-              </div>
-            </div>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBCol>
-      
-      
-    </MDBRow>
-  </MDBContainer>
-
+      </div>
     </>
   );
 };

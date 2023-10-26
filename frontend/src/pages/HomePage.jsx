@@ -10,9 +10,9 @@ import Footer from "../components/Layout/Footer";
 import PlayerComponent from '../components/PlayerComponent'
 import { useEffect, useRef, useState } from "react";
 import Slide from 'react-reveal/Slide';
-import { Fade, Rotate } from 'react-reveal';
+import {  Rotate } from 'react-reveal';
 
-
+import "../styles/styles.css";
 const RevealOnScroll = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
@@ -48,33 +48,40 @@ const HomePage = () => {
   return (
     <div>
         <Header activeHeading={1} />
-        <RevealOnScroll>
-        <Rotate>
+       
+        
         <Hero />
-        </Rotate>
-        </RevealOnScroll>
+       
+       
         <Slide right>
-       <RevealOnScroll>
+      
         <Categories />
-        </RevealOnScroll>
+        
         </Slide>
         
-
+        <Slide top>
         <RevealOnScroll>
            <BestDeals />
            </RevealOnScroll>
-           <RevealOnScroll>
-        <Events />
-        </RevealOnScroll>
+           </Slide>
+           {/* <RevealOnScroll> */}
+        {/* <Events /> */}
+        {/* </RevealOnScroll> */}
+        <Slide top>
         <RevealOnScroll>
         <FeaturedProduct />
         </RevealOnScroll>
+        </Slide>
+        <Slide bottom>
         <RevealOnScroll>
         <Sponsored />
         </RevealOnScroll>
+        </Slide>
+        <Slide bottom>
         <RevealOnScroll>
         <Footer />
         </RevealOnScroll>
+        </Slide>
     </div>
   )
 }
