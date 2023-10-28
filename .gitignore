@@ -9,3 +9,7 @@ frontend/node_modules/.cache/default-development/18.pack
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+backend2/node_modules
+backend2/config/.env
+backend2/vercel.json
+
