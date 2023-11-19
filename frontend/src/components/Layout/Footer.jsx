@@ -11,7 +11,7 @@ import {
   footerProductLinks,
   footerSupportLinks,
 } from "../../static/data";
-
+import happyHome from "./../../images/happyhome.png"
 const Footer = () => {
   return (
     <div className="bg-[#000] text-white">
@@ -37,7 +37,8 @@ const Footer = () => {
       <div className="grid grid-cols-1 sm:gird-cols-3 lg:grid-cols-4 gap-6 sm:px-8 px-5 py-16 sm:text-center">
         <ul className="px-5 text-center sm:text-start flex sm:block flex-col items-center">
           <img
-            src="https://res.cloudinary.com/dtqnwfxnx/image/upload/c_scale,h_56,w_203/v1692031944/logo_reshjk.png"
+            className=" w-40"
+            src={happyHome}
             alt=""
             style={{ filter: "brightness(5) invert(2)" }}
           />

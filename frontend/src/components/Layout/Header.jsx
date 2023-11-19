@@ -7,6 +7,7 @@ import {
   AiOutlineSearch,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
+import happyHome from "./../../images/happyhome.png"
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
@@ -55,14 +56,14 @@ const Header = ({ activeHeading }) => {
     <>
       <div className={`${styles.section}`}>
         <div className="hidden 800px:h-[50px] 800px:my-[20px] 800px:flex items-center justify-between">
-          <div>
-            <Link to="/">
-              <img
-                src="https://res.cloudinary.com/dtqnwfxnx/image/upload/c_scale,h_56,w_203/v1692031944/logo_reshjk.png"
-                alt=""
-              />
-            </Link>
-          </div>
+        <div className=" h-32 w-32 mt-8">
+      <Link to="/">
+        <img
+          src={happyHome} // Update the src attribute
+          alt=""
+        />
+      </Link>
+    </div>
           {/* search box */}
           <div className="w-[50%] relative">
             <input

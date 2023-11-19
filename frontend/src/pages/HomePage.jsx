@@ -74,7 +74,7 @@ const HomePage = () => {
         </Slide>
         <Slide bottom>
         <RevealOnScroll>
-        <Sponsored />
+       
         </RevealOnScroll>
         </Slide>
         <Slide bottom>
