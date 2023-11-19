@@ -3,6 +3,10 @@ const { isSeller, isAuthenticated, isAdmin } = require("../middleware/auth");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const router = express.Router();
 const Product = require("../model/product");
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0537612c8df4eb020233a39244194128331c5480
 const Shop = require("../model/shop");
 const cloudinary = require("cloudinary");
 const ErrorHandler = require("../utils/ErrorHandler");
@@ -81,7 +85,7 @@ router.delete(
       const product = await Product.findById(req.params.id);
 
       if (!product) {
-        return next(new ErrorHandler("Product is not found with this id", 404));
+        return next(new ErrorHandler("service is not found with this id", 404));
       }    
 
       for (let i = 0; 1 < product.images.length; i++) {
@@ -94,7 +98,7 @@ router.delete(
 
       res.status(201).json({
         success: true,
-        message: "Product Deleted successfully!",
+        message: "service Deleted successfully!",
       });
     } catch (error) {
       return next(new ErrorHandler(error, 400));
