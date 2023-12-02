@@ -99,7 +99,7 @@ const ProductCard = ({ data,isEvent }) => {
           ) : (
             <AiOutlineHeart
               size={22}
-              className="cursor-pointer absolute right-2 top-5"
+              className="cursor-pointer absolute right-12 top-5"
               onClick={() => addToWishlistHandler(data)}
               color={click ? "red" : "#333"}
               title="Add to wishlist"
@@ -114,7 +114,7 @@ const ProductCard = ({ data,isEvent }) => {
           /> */}
           <AiOutlineShoppingCart
             size={25}
-            className="cursor-pointer absolute right-2 top-14"
+            className="cursor-pointer absolute right-2 top-4"
             onClick={() => addToCartHandler(data._id)}
             color="#FF0000"
             title="Add to cart"
@@ -137,7 +137,7 @@ const ProductCard = ({ data,isEvent }) => {
       </Link>
               </p>
               <p className="small text-danger">
-                <s>  {data.originalPrice ? data.originalPrice + "₹" : null}</s>
+                <s>  {data.originalPrice ? data.originalPrice +  "₹" : null}</s>
               </p>
             </div>
 
@@ -146,7 +146,7 @@ const ProductCard = ({ data,isEvent }) => {
           {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
         </h4>
               <h4 >
-              ₹{data.originalPrice === 0
+              &nbsp;&nbsp;&nbsp;&nbsp;₹{data.originalPrice === 0
                   ? data.originalPrice
                   : data.discountPrice}
                
