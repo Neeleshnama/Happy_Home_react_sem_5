@@ -161,7 +161,7 @@ const ShippingInfo = ({
 }) => {
   return (
     <div className="w-full 800px:w-[95%] bg-white rounded-md p-5 pb-8">
-      <h5 className="text-[18px] font-[500]">Shipping Address</h5>
+      <h5 className="text-[18px] font-[500]">Booking Address</h5>
       <br />
       <form>
         <div className="w-full flex pb-3">
@@ -196,7 +196,7 @@ const ShippingInfo = ({
             />
           </div>
           <div className="w-[50%]">
-            <label className="block pb-2">Zip Code</label>
+            <label className="block pb-2">pin Code</label>
             <input
               type="number"
               value={zipCode}

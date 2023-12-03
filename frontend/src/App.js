@@ -86,7 +86,7 @@ const App = () => {
               element={
                 <ProtectedRoute>
                   <PaymentPage />
-                </ProtectedRoute>
+                 </ProtectedRoute>
               }
             />
           </Routes>
@@ -112,9 +112,9 @@ const App = () => {
         <Route
           path="/checkout"
           element={
-            <ProtectedRoute>
+             <ProtectedRoute>
               <CheckoutPage />
-            </ProtectedRoute>
+             </ProtectedRoute>
           }
         />
         <Route path="/order/success" element={<OrderSuccessPage />} />
@@ -289,7 +289,7 @@ const App = () => {
           element={
             <ProtectedAdminRoute>
               <AdminDashboardOrders />
-            </ProtectedAdminRoute>
+             </ProtectedAdminRoute>
           }
         />
          <Route
