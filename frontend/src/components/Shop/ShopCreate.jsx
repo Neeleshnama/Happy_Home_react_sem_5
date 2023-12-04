@@ -58,14 +58,13 @@ const ShopCreate = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8" style={{backgroundImage:"url(https://images.unsplash.com/photo-1505691723518-36a5ac3be353?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG9tZXxlbnwwfHwwfHx8MA%3D%3D)"}}>
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+    <div className="min-h-screen bg-black flex justify-center py-12 sm:px-6 lg:px-8">
+   
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[35rem]">
+        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Register as a seller
         </h2>
-      </div>
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[35rem]">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
@@ -245,6 +244,13 @@ const ShopCreate = () => {
             </div>
           </form>
         </div>
+      </div>
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+      <img
+          src="/register.png"
+          alt="Registration Image"
+          className=" h-3/4 w-screen mt-24"
+        />
       </div>
     </div>
   );
