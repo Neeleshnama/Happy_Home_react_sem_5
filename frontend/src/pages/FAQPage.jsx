@@ -26,7 +26,7 @@ const Faq = () => {
 
   return (
     <div className={`${styles.section} my-8`}>
-      <h2 className="text-3xl font-bold text-gray-100 mb-8">FAQ</h2>
+      <h2 className="text-3xl font-bold text-blue-900 mb-8">FAQ</h2>
       <div className="mx-auto space-y-4">
         {/* single Faq */}
 
@@ -35,7 +35,7 @@ const Faq = () => {
             className="flex items-center justify-between w-full"
             onClick={() => toggleTab(2)}
           >
-            <span className="text-lg font-medium text-gray-300">
+            <span className="text-lg font-medium text-blue-900">
               What is your return policy?
             </span>
             {activeTab === 2 ? (
@@ -85,7 +85,7 @@ const Faq = () => {
             className="flex items-center justify-between w-full"
             onClick={() => toggleTab(3)}
           >
-            <span className="text-lg font-medium text-gray-300">
+            <span className="text-lg font-medium text-blue-900">
               How do I track my order?
             </span>
             {activeTab === 3 ? (
@@ -134,7 +134,7 @@ const Faq = () => {
             className="flex items-center justify-between w-full"
             onClick={() => toggleTab(4)}
           >
-            <span className="text-lg font-medium text-gray-300">
+            <span className="text-lg font-medium text-blue-900">
               How do I contact customer support?
             </span>
             {activeTab === 4 ? (
@@ -183,7 +183,7 @@ const Faq = () => {
             className="flex items-center justify-between w-full"
             onClick={() => toggleTab(5)}
           >
-            <span className="text-lg font-medium text-gray-300">
+            <span className="text-lg font-medium text-blue-900">
               Can I change or cancel my order?
             </span>
             {activeTab === 5 ? (
@@ -233,7 +233,7 @@ const Faq = () => {
             className="flex items-center justify-between w-full"
             onClick={() => toggleTab(6)}
           >
-            <span className="text-lg font-medium text-gray-300">
+            <span className="text-lg font-medium text-blue-900">
               Do you offer international shipping?
             </span>
             {activeTab === 6 ? (
@@ -280,7 +280,7 @@ const Faq = () => {
             className="flex items-center justify-between w-full"
             onClick={() => toggleTab(7)}
           >
-            <span className="text-lg font-medium text-gray-300">
+            <span className="text-lg font-medium text-blue-900">
               What payment methods do you accept?
             </span>
             {activeTab === 7 ? (

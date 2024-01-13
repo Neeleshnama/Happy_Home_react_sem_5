@@ -1,7 +1,7 @@
 .text-black {
     --mdb-text-opacity: 1;
     color: rgba(var(--mdb-white-rgb), var(--mdb-text-opacity)) !important ;
-    background-color: white !important;
+    background-color: white;
     border-radius: 8px !important;
     margin: 5px !important;
 }

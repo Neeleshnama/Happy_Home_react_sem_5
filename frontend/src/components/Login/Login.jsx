@@ -34,10 +34,10 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-1000">
+    <div className="flex min-h-screen bg-blue-100">
       <div className="w-1/2 p-8 ml-20 mt-48 font-extrabold text-6xl" >
         {/* Display the best offer for your service */}
-        <div className="text-white" >
+        <div className=" text-blue-900" >
           <h1>The best offer for</h1>
        
           <h1>your service</h1>

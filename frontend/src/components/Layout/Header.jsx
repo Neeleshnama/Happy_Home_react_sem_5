@@ -7,7 +7,7 @@ import {
   AiOutlineSearch,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import happyHome from "./../../images/happyhome.png"
+import happyHome from "./../../images/happy-home-logo.png"
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
@@ -54,13 +54,14 @@ const Header = ({ activeHeading }) => {
 
   return (
     <>
-      <div className={`${styles.section}`}>
-        <div className="hidden 800px:h-[50px] 800px:my-[20px] 800px:flex items-center justify-between">
+      <div className={`${styles.section}`} >
+      <div className="hidden 800px:h-[50px] 800px:my-[20px] 800px:flex items-center justify-between">
           <div className=" h-32 w-32 mt-8">
             <Link to="/">
               <img
                 src={happyHome} // Update the src attribute
                 alt=""
+                blurRadius={5} 
               />
             </Link>
           </div>
@@ -108,9 +109,11 @@ const Header = ({ activeHeading }) => {
           </div>
         </div>
       </div>
+    
       <div
         className={`${active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
           } transition hidden 800px:flex items-center justify-between w-full bg-[#3321c8] h-[70px]`}
+        
       >
         <div
           className={`${styles.section} relative ${styles.noramlFlex} justify-between`}
@@ -216,7 +219,7 @@ const Header = ({ activeHeading }) => {
           <div>
             <Link to="/">
               <img
-                src="https://shopo.quomodothemes.website/assets/images/logo.svg"
+               
                 alt=""
                 className="mt-3 cursor-pointer"
               />
@@ -228,7 +231,7 @@ const Header = ({ activeHeading }) => {
               onClick={() => setOpenCart(true)}
             >
               <AiOutlineShoppingCart size={30} />
-              <span class="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px]  leading-tight text-center">
+              <span class="absolute right-0 top-0 rounded-full bg-[#f2f3f2] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px]  leading-tight text-center">
                 {cart && cart.length}
               </span>
             </div>
@@ -243,7 +246,7 @@ const Header = ({ activeHeading }) => {
         {/* header sidebar */}
         {open && (
           <div
-            className={`fixed w-full bg-[#0000005f] z-20 h-full top-0 left-0`}
+            className={`fixed w-full bg-[#1b24665f] z-20 h-full top-0 left-0`}
           >
             <div className="fixed w-[70%] bg-[#fff] h-screen top-0 left-0 z-10 overflow-y-scroll">
               <div className="w-full justify-between flex pr-3">

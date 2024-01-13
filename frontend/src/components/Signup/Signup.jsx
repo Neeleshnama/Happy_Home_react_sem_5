@@ -45,7 +45,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black flex  justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-blue-200 flex  justify-center py-12 sm:px-6 lg:px-8">
       <div className="mt-44 sm:w-full sm:max-w-md">
         {/* Add an image to the left of the registration form */}
         <img
