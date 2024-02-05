@@ -13,3 +13,5 @@ backend2/node_modules
 backend2/config/.env
 backend2/vercel.json
 
+
+.vercel

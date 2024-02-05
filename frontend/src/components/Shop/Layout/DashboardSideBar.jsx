@@ -72,7 +72,7 @@ const DashboardSideBar = ({ active }) => {
               active === 4 ? "text-[crimson]" : "text-[#555]"
             }`}
           >
-            Create Product
+            Create service
           </h5>
         </Link>
       </div>

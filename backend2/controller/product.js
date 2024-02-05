@@ -3,10 +3,6 @@ const { isSeller, isAuthenticated, isAdmin } = require("../middleware/auth");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const router = express.Router();
 const Product = require("../model/product");
-<<<<<<< HEAD
-=======
-
->>>>>>> 0537612c8df4eb020233a39244194128331c5480
 const Shop = require("../model/shop");
 const cloudinary = require("cloudinary");
 const ErrorHandler = require("../utils/ErrorHandler");

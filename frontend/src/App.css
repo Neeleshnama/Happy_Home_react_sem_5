@@ -38,6 +38,14 @@ body {
     background-color: #161615 !important;
     /* background-color: white; */
     scroll-behavior: smooth;
+    
+}
+::before, ::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e5e7eb;
+  color: wheat;
 }
 input,select{
   outline: none;
@@ -67,6 +75,6 @@ h1{
   font-size: inherit !important;
 }
 /* Firefox */
-input[type=number] {
+/* nput[type=number] {
   -moz-appearance: textfield;
-}
+}i */

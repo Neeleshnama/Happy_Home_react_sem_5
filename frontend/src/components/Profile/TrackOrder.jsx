@@ -22,17 +22,17 @@ const TrackOrder = () => {
       <>
         {data && data?.status === "Processing" ? (
           <h1 className="text-[20px]">Your Order is processing in shop.</h1>
-        ) : data?.status === "Transferred to delivery partner" ? (
+        ) : data?.status === "confirmed" ? (
           <h1 className="text-[20px]">
-            Your Order is on the way for delivery partner.
+            confirmed
           </h1>
-        ) : data?.status === "Shipping" ? (
+        ) : data?.status === "shortly reaching you" ? (
           <h1 className="text-[20px]">
-            Your Order is on the way with our delivery partner.
+           shortly reaching you
           </h1>
-        ) : data?.status === "Received" ? (
+        ) : data?.status === "arriving in 10 mimutes" ? (
           <h1 className="text-[20px]">
-            Your Order is in your city. Our Delivery man will deliver it.
+            arriving in 10 mimutes
           </h1>
         ) : data?.status === "On the way" ? (
           <h1 className="text-[20px]">

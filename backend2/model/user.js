@@ -64,6 +64,15 @@ const userSchema = new mongoose.Schema({
  resetPasswordTime: Date,
 });
 
+// new 
+const ResetTokens = new mongoose.Schema({
+  email: String,
+  token: String,
+  createdAt: { type: Date, default: Date.now, expires: 60 * 60 * 24 }, // Token expires in 24 hours
+});
+
+const ResetToken = mongoose.model('ResetToken', ResetTokens);
+
 
 //  Hash password
 userSchema.pre("save", async function (next){
@@ -85,5 +94,11 @@ userSchema.methods.getJwtToken = function () {
 userSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
+const User = mongoose.model('User', userSchema);
+//const ResetToken = mongoose.model('ResetToken', resetTokenSchema);
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = { User, ResetToken };
+
+
+// 
+//module.exports = mongoose.model("User", userSchema);

@@ -258,7 +258,7 @@ const ShippingInfo = ({
             />
           </div>
           <div className="w-[50%]">
-            <label className="block pb-2">Address2</label>
+            <label className="block pb-2">Slot Timing</label>
             <input
               type="address"
               value={address2}

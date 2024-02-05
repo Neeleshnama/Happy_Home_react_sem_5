@@ -668,7 +668,7 @@ const Address = () => {
                     />
                   </div>
                   <div className="w-full pb-2">
-                    <label className="block pb-2">Address 2</label>
+                    <label className="block pb-2">Slot Timing</label>
                     <input
                       type="address"
                       className={`${styles.input}`}

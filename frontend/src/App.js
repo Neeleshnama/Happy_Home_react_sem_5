@@ -21,6 +21,8 @@ import {
   OrderDetailsPage,
   TrackOrderPage,
   UserInbox,
+  ResetPasswordPage,
+  ForgotPasswordpage,
 } from "./routes/Routes.js";
 import {
   ShopDashboardPage,
@@ -60,6 +62,7 @@ import axios from "axios";
 import { server } from "./server";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import AdminPage from "./pages/AdminLoginPage.jsx";
 
 const App = () => {
   const [stripeApikey, setStripeApiKey] = useState("");
@@ -96,6 +99,10 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignupPage />} />
+        <Route path="/admin" element={<AdminPage/>} />
+        <Route path="/reset-password/:token" element={<ResetPasswordPage/>} />
+        <Route path="/forgot-password" element={<ForgotPasswordpage/>} />
+
         <Route
           path="/activation/:activation_token"
           element={<ActivationPage />}

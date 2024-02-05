@@ -1,5 +1,7 @@
 const express = require("express");
-const User = require("../model/user");
+//const User = require("../model/user");
+const {User,ResetToken} = require("../model/user");
+const bcrypt = require('bcrypt');
 const router = express.Router();
 const cloudinary = require("cloudinary");
 const ErrorHandler = require("../utils/ErrorHandler");
@@ -346,6 +348,109 @@ router.put(
   })
 );
 
+// forgot password request(new changes)
+
+// Route to handle forgot password request
+router.post('/forgot-password', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    // Generate a unique token
+    const token = Math.random().toString(36).substr(2) + Date.now();
+
+    // Save the token in the database
+    await ResetToken.create({ email, token });
+
+    // const mailOptions = {
+    //   from: 'your-email@gmail.com',
+    //   to: email,
+    //   subject: 'Password Reset',
+    //   text: `Here is your password reset link: http://yourwebsite.com/reset-password/${token}`,
+    // };
+
+    // transporter.sendMail(mailOptions, (error, info) => {
+    //   if (error) {
+    //     return res.status(500).send(error.toString());
+    //   }
+    //   console.log('Email sent: ' + info.response);
+    //   res.status(200).send('Password reset email sent.');
+    // });
+    await sendMail({
+      email: email,
+      subject: "set your password ",
+      message: `Hello ${email}, please click on the  link to reset your password: http://localhost:3000/reset-password/${token}`,
+    });
+    res.status(201).json({
+      success: true,
+      message: `please check your email:- ${email} to reset your password!`,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error.toString());
+  }
+});
+
+// Route to render reset password form
+router.get('/reset-password/:token', async (req, res) => {
+  const { token } = req.params;
+
+  try {
+    // Find the token in the database
+    const resetToken = await ResetToken.findOne({ token });
+
+    if (!resetToken) {
+      return res.status(404).send('Invalid or expired reset token.');
+    }
+
+    // TODO: Add your logic here to check if the token is still valid based on your requirements
+
+    // Render the reset password form with the token
+    // res.render('reset-password', { token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error.toString());
+  }
+});
+
+// Route to handle reset password form submission
+router.post('/reset-password/:token', async (req, res) => {
+  const { token } = req.params;
+  const { newPassword } = req.body;
+
+  try {
+    // Find the token in the database
+    const resetToken = await ResetToken.findOne({ token });
+
+    if (!resetToken) {
+      return res.status(404).send('Invalid or expired reset token.');
+    }
+
+    // TODO: Add your logic here to check if the token is still valid based on your requirements
+
+    // Find the user by email (assuming email is unique)
+    const user = await User.findOne({ email: resetToken.email });
+
+    if (!user) {
+      return res.status(404).send('User not found.');
+    }
+
+    // TODO: Add your logic here to update the user's password
+    user.password = newPassword;
+
+    // Save the updated user
+    await user.save();
+
+    // Delete the used reset token
+    await ResetToken.deleteOne({ token });
+
+    res.status(200).send('Password successfully reset.');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error.toString());
+  }
+});
+
+
 // find user infoormation with the userId
 router.get(
   "/user-info/:id",
@@ -413,5 +518,49 @@ router.delete(
     }
   })
 );
+
+// for admin login 
+// Route for admin login
+router.post('/adminlogin',async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Find the user by email
+   // const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select("+password +role");
+
+      if (!user) {
+        return next(new ErrorHandler("User doesn't exists!", 400));
+      }
+
+      const passwordMatch= await user.comparePassword(password);
+
+
+    // if (!user) {
+    //   return res.status(401).json({ success: false, message: 'Invalid credentials' });
+    // }
+
+    // Compare the provided password with the stored hashed password
+    //const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ success: false, message: 'Invalid credentials' });
+    }
+
+    // Check if the user has the 'admin' role
+    if ((user.role == 'user') ) {
+      return res.status(403).json({ success: false, message: 'Access denied. Not an admin.' });
+    }
+
+    // Generate a JWT token for authentication
+    //const token = jwt.sign({ userId: user._id, role: user.role }, 'your-secret-key', { expiresIn: '1h' });
+
+    res.status(200).json({ success: true});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
 
 module.exports = router;
