@@ -29,9 +29,10 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 const user = require("./controller/user");
 const shop = require("./controller/shop");
 const product = require("./controller/product");
-
 const payment = require("./controller/payment");
+const order = require("./controller/order");
 
+app.use("/api/v2/order", order);
 app.use("/api/v2/user", user);
 
 app.use("/api/v2/shop", shop);
