@@ -133,12 +133,17 @@ router.post(
 );
 
 // load user
+// getting error flagged for check
+
+// load user
 router.get(
   "/getuser",
   isAuthenticated,
+  
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const user = await User.findById(req.user.id);
+      const user = await User.findOne({ _id: req.user.id });
+      
 
       if (!user) {
         return next(new ErrorHandler("User doesn't exists", 400));
@@ -153,6 +158,8 @@ router.get(
     }
   })
 );
+
+// log ou
 
 // log out user
 router.get(
