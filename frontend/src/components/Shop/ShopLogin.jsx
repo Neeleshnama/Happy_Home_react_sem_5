@@ -35,14 +35,28 @@ const ShopLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8" style={{backgroundImage:"url(https://images.unsplash.com/photo-1505691723518-36a5ac3be353?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG9tZXxlbnwwfHwwfHx8MA%3D%3D)"}}>
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+    <div className="min-h-screen bg-blue-100 flex justify-center py-12 sm:px-6 lg:px-8" >
+      <div className="w-1/2 p-8 ml-20 mt-48 font-extrabold text-6xl" >
+      <div className="text-blue-900" >
+          <h1>The best offer for</h1>
+       
+          <h1>your service</h1>
+          <br/>
+         
+        </div>
+        <p className=" text-lg text-gray-400">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+            voluptatum,<br/>quibusdam, quia, voluptate quod quos quae voluptatibus
+            dolorum natus quas quidem?<br/> Quisquam voluptatum, quibusdam, quia,
+            voluptate quod quos quae voluptatibus<br/> dolorum natus quas quidem?
+
+          </p>
+      </div>
+      <div className=" w-5/12 p-4 -ml-26 mt-44">
+        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <h2 className="mb-6 mt-6 text-center text-3xl font-extrabold text-gray-900">
           Login to your shop
         </h2>
-      </div>
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label

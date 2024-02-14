@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
@@ -7,7 +7,8 @@ import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 
-const Singup = () => {
+
+const Signup = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +37,7 @@ const Singup = () => {
         setName("");
         setEmail("");
         setPassword("");
-        setAvatar();
+        setAvatar(null);
       })
       .catch((error) => {
         toast.error(error.response.data.message);
@@ -44,14 +45,21 @@ const Singup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8" style={{backgroundImage:"url(https://images.unsplash.com/photo-1505691723518-36a5ac3be353?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG9tZXxlbnwwfHwwfHx8MA%3D%3D)"}}>
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Register as a new user
-        </h2>
+    <div className="min-h-screen bg-blue-200 flex  justify-center py-12 sm:px-6 lg:px-8">
+      <div className="mt-44 sm:w-full sm:max-w-md">
+        {/* Add an image to the left of the registration form */}
+        <img
+          src="/signup.png"
+          alt="Registration Image"
+          className="ml-44 h-full w-full -mt-36"
+        />
       </div>
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="mt-20 sm:mx-auto sm:w-full sm:max-w-md">
+        {/* Registration form */}
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <h2 className="mt-4 mb-6 text-center text-3xl font-extrabold text-gray-900">
+            Register as a new user
+          </h2>
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
@@ -181,4 +189,4 @@ const Singup = () => {
   );
 };
 
-export default Singup;
+export default Signup;

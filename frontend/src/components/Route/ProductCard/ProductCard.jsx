@@ -70,14 +70,14 @@ const ProductCard = ({ data,isEvent }) => {
   };
 
   return (
-    <>
+    <div>
      {/* //write for new product card */}
-     <MDBContainer fluid className="my-5">
+     <MDBContainer fluid className="my-5 h-[22rem] w-auto">
     <MDBRow>
-      <MDBCol md="12" lg="4" className="mb-4 mb-lg-0">
+      <MDBCol md="12" lg="4" className="mb-4 mb-lg-0 h-80">
         <MDBCard>
-          <div className="d-flex justify-content-between p-3">
-            <p className="lead mb-0"> Combo Offer</p>
+          <div className="d-flex  p-3">
+            <p className="lead mb-0 mr-3"> Combo Offer</p>
             <div
               className="bg-black rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
               style={{ width: "35px", height: "35px" }}
@@ -91,7 +91,7 @@ const ProductCard = ({ data,isEvent }) => {
           {click ? (
             <AiFillHeart
               size={22}
-              className="cursor-pointer absolute right-2 top-5"
+              className="cursor-pointer absolute right-12 top-5"
               onClick={() => removeFromWishlistHandler(data)}
               color={click ? "red" : "#333"}
               title="Remove from wishlist"
@@ -133,7 +133,7 @@ const ProductCard = ({ data,isEvent }) => {
             <div className="d-flex justify-content-between">
               <p className="small">
               <Link to={`/shop/preview/${data?.shop._id}`}>
-        <h5 className="text-muted">{data.shop.name}</h5>
+        <h5 className=" w-36  text-base">{data.shop.name}</h5>
       </Link>
               </p>
               <p className="small text-danger">
@@ -142,7 +142,7 @@ const ProductCard = ({ data,isEvent }) => {
             </div>
 
             <div className="d-flex justify-content-between mb-3">
-            <h4 className="pb-3 font-[500]">
+            <h4 className="pb-3 font-[500] w-36">
           {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
         </h4>
               <h4 >
@@ -154,8 +154,8 @@ const ProductCard = ({ data,isEvent }) => {
             </div>
 
             <div class="d-flex justify-content-between mb-2">
-              <p class="text-muted mb-0 text-green">
-               slots: <span class="fw-bold text-danger"> <br /> {data?.sold_out*(-1) }  booked</span>
+              <p class="text-muted mb-0 text-green w-36">
+               slots: <span class="fw-bold text-danger"> {data?.sold_out*(-1) }&nbsp;booked</span>
               </p>
               <div class="ms-auto text-warning">
               <Ratings rating={data?.ratings} />
@@ -169,7 +169,7 @@ const ProductCard = ({ data,isEvent }) => {
     </MDBRow>
   </MDBContainer>
 
-    </>
+    </div>
   );
 };
 

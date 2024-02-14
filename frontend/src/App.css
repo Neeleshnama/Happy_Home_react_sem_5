@@ -22,11 +22,9 @@
   border-radius: 2.5rem;
   border: 2px solid black;
 }
-.md\:justify-between{
-  background-color: black !important;
-}
+
 .bg-\[\#3321c8\]{
-  background-color: black !important;
+  background-color: rgb(30 58 138) !important;
 }
 
 body {
@@ -35,7 +33,7 @@ body {
     font-family: cursive;
     font-weight: bolder;
     background: #161615;
-    background-color: #161615 !important;
+    background-color: white !important;
     /* background-color: white; */
     scroll-behavior: smooth;
     

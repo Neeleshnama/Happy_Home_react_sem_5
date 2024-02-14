@@ -5,18 +5,19 @@ import { FiPackage, FiShoppingBag } from 'react-icons/fi'
 import { MdOutlineLocalOffer } from 'react-icons/md'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import happyHome from "./../../images/happyhome.png"
 
 const AdminHeader = () => {
     const {user} = useSelector((state) => state.user);
 
   return (
          <div className="w-full h-[80px] bg-white shadow sticky top-0 left-0 z-30 flex items-center justify-between px-4">
-      <div>
+      <div className=" h-32 w-32 mt-8">
         <Link to="/">
-          <img
-            src="https://res.cloudinary.com/dtqnwfxnx/image/upload/c_scale,h_56,w_203/v1692031944/logo_reshjk.png"
-            alt="https://res.cloudinary.com/dtqnwfxnx/image/upload/c_scale,h_56,w_203/v1692031944/logo_reshjk.png"
-          />
+        <img
+                src={happyHome} // Update the src attribute
+                alt=""
+              />
         </Link>
       </div>
       <div className="flex items-center">

@@ -51,9 +51,11 @@ export const getAllProductsShop = (id) => async (dispatch) => {
       type: "getAllProductsShopRequest",
     });
 
-    const { data } = await axios.get(
-      `${server}/product/get-all-products-shop/${id}`
-    );
+    const response = await fetch(`${server}/product/get-all-products-shop/${id}`);
+    const data = await response.json();
+    
+  
+    
     dispatch({
       type: "getAllProductsShopSuccess",
       payload: data.products,
@@ -99,7 +101,8 @@ export const getAllProducts = () => async (dispatch) => {
       type: "getAllProductsRequest",
     });
 
-    const { data } = await axios.get(`${server}/product/get-all-products`);
+    const response= await fetch(`${server}/product/get-all-products`);
+    const data = await response.json();
     dispatch({
       type: "getAllProductsSuccess",
       payload: data.products,

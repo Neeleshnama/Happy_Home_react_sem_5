@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../styles/styles";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,39 +15,52 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios
-      .post(
+    try {
+      const res = await axios.post(
         `${server}/user/login-user`,
         {
           email,
           password,
         },
         { withCredentials: true }
-      )
-      .then((res) => {
-        toast.success("Login Success!");
-        navigate("/");
-        window.location.reload(true); 
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-      });
+      );
+
+      toast.success("Login Success!");
+      navigate("/");
+      window.location.reload(true);
+    } catch (err) {
+      toast.error(err.response.data.message);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8" style={{backgroundImage:"url(https://images.unsplash.com/photo-1505691723518-36a5ac3be353?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG9tZXxlbnwwfHwwfHx8MA%3D%3D)"}}>
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center bg-gray-50 text-3xl font-extrabold text-black">
-          Login to your account
-        </h2>
+    <div className="flex min-h-screen bg-blue-100">
+      <div className="w-1/2 p-8 ml-20 mt-48 font-extrabold text-6xl" >
+        {/* Display the best offer for your service */}
+        <div className=" text-blue-900" >
+          <h1>The best offer for</h1>
+       
+          <h1>your service</h1>
+          <br/>
+         
+        </div>
+        <p className=" text-lg text-gray-400">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+            voluptatum,<br/>quibusdam, quia, voluptate quod quos quae voluptatibus
+            dolorum natus quas quidem?<br/> Quisquam voluptatum, quibusdam, quia,
+            voluptate quod quos quae voluptatibus<br/> dolorum natus quas quidem?
+
+          </p>
       </div>
-      <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-black py-20 px-16 shadow md:rounded-lg md:px-10">
+      <div className=" w-5/12 p-4 -ml-26 mt-44">
+        {/* Login form */}
+        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <h2 className="mb-6">Login to your account</h2>
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-white"
+                className="block text-sm font-medium text-black"
               >
                 Email address
               </label>
@@ -66,7 +79,7 @@ const Login = () => {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-white"
+                className="block text-sm font-medium text-black"
               >
                 Password
               </label>
@@ -105,7 +118,7 @@ const Login = () => {
                 />
                 <label
                   htmlFor="remember-me"
-                  className="ml-2 block text-sm text-yellow-50"
+                  className="ml-2 block text-sm text-white-700"
                 >
                   Remember me
                 </label>
