@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './forgotpwd.css'
+import { toast } from "react-toastify";
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -16,16 +18,19 @@ const ForgotPassword = () => {
         const response = await axios.post('http://localhost:8000/api/v2/user/forgot-password', { email });
   
         // Handle the response, display a success message, or show an error notification
+        toast.success(response.data);
         setMessage(response.data);
       } catch (error) {
         console.error(error);
+        toast.error(error);
         // Handle error, display an error message, or show an error notification
         setMessage('An error occurred while sending the password reset email.');
       }
   };
 
   return (
-    <div>
+    <div className='fpwd'>
+      {/* hi
       <h2>Forgot Password</h2>
       <form onSubmit={handleSubmit}>
         <label>
@@ -34,7 +39,23 @@ const ForgotPassword = () => {
         </label>
         <button type="submit">Reset Password</button>
       </form>
-      <p>{message.success ? 'Success: ' : 'Error: '}{message.message}</p>
+      <p>{message.success ? 'Success: ' : ' '}{message.message}</p>  */}
+
+<div className="bg-image">hi</div>
+<div class="container ">
+  <div class="brand-logo"></div>
+  <div class="brand-title">Happy Home</div>
+  <form onSubmit={handleSubmit}>
+  <div class="inputs">
+    <label>EMAIL <br />(Please enter your registered mail only)</label>
+    <input type="email" value={email} onChange={handleEmailChange} placeholder="example@test.com" />
+    <p style={{color:'red'}}>{message.success ? 'Success: ' : ' '}{message.message}</p>
+    
+    <button type="submit">RESET</button>
+  </div>
+  </form>
+  
+</div>
     </div>
   );
 };
