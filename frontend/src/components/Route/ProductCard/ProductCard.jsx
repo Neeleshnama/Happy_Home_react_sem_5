@@ -1,5 +1,6 @@
 import react , { useState } from "react";
 import "./styleproduct.css";
+import './ribbion.css'
 import {
   MDBContainer,
   MDBRow,
@@ -68,22 +69,44 @@ const ProductCard = ({ data,isEvent }) => {
       }
     }
   };
+  
+  
+  const styles = {
+    banner: {
+      position: 'relative',
+      right: -40,
+      top: 20,
+      width: 160,
+      transform: [{ rotate: "45deg" }],
+      backgroundColor: 'black',
+      color: 'white',
+      padding: 8,
+      textAlign: 'center',
+    },
+  };
 
   return (
     <div>
      {/* //write for new product card */}
-     <MDBContainer fluid className="my-5 h-[22rem] w-auto">
+     <MDBContainer fluid className="my-5 h-[22rem] w-auto corners">
     <MDBRow>
       <MDBCol md="12" lg="4" className="mb-4 mb-lg-0 h-80">
         <MDBCard>
           <div className="d-flex  p-3">
             <p className="lead mb-0 mr-3"> Combo Offer</p>
+            
             <div
-              className="bg-black rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
+              className="bg-white rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
               style={{ width: "35px", height: "35px" }}
-            >
-              <p className="text-white mb-0 small">new</p>
-              
+            > 
+            <div className="ribbion"><div class="box">
+  <div class="ribbon-2 ">{data.tags}</div>
+</div></div>
+            
+              {/* {data.tags!=undefined ?(<p className="text-white mb-0 small">{data.tags}</p>):('no')
+              } */}
+              {/* <p className="text-white mb-0 small">{data.tags}</p>
+               */}
             </div>
            
             {/* // wishlist item */}
@@ -161,6 +184,8 @@ const ProductCard = ({ data,isEvent }) => {
               <Ratings rating={data?.ratings} />
               </div>
             </div>
+            
+         
           </MDBCardBody>
         </MDBCard>
       </MDBCol>

@@ -18,6 +18,7 @@ import { addTocart } from "../../redux/actions/cart";
 import { toast } from "react-toastify";
 import Ratings from "./Ratings";
 import axios from "axios";
+import PackageTable from "../Packages/PackageTable";
 
 const ProductDetails = ({ data }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
@@ -29,6 +30,12 @@ const ProductDetails = ({ data }) => {
   const [select, setSelect] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [selectedPackageIndex, setSelectedPackageIndex] = useState(0);
+
+  const handlePackageSelection = (index) => {
+    setSelectedPackageIndex(index);
+    setCount(index);
+  };
   useEffect(() => {
     dispatch(getAllProductsShop(data && data?.shop._id));
     if (wishlist && wishlist.find((i) => i._id === data?._id)) {
@@ -153,9 +160,32 @@ const ProductDetails = ({ data }) => {
                     {data.originalPrice ? data.originalPrice + "₹" : null}
                   </h3>
                 </div>
+                <div>
+                  <PackageTable category={data.category} onSelectPackage={handlePackageSelection} />
+                </div>
+                {/* <h3>{selectedPackageIndex}</h3> */}
 
                 <div className="flex items-center mt-12 justify-between pr-3">
-                  <div>
+                  {selectedPackageIndex ?( <div>Add To Cart</div>
+                    ):( <div>
+                      <button
+                        className="bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
+                        onClick={decrementCount}
+                      >
+                        -
+                      </button>
+                      <span className="bg-gray-200 text-gray-800 font-medium px-4 py-[11px]">
+                        {count * selectedPackageIndex}
+  
+                      </span>
+                      <button
+                        className="bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
+                        onClick={incrementCount}
+                      >
+                        +
+                      </button>
+                    </div>)}
+                  {/* <div>
                     <button
                       className="bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
                       onClick={decrementCount}
@@ -163,7 +193,8 @@ const ProductDetails = ({ data }) => {
                       -
                     </button>
                     <span className="bg-gray-200 text-gray-800 font-medium px-4 py-[11px]">
-                      {count}
+                      {count * selectedPackageIndex}
+
                     </span>
                     <button
                       className="bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
@@ -171,7 +202,7 @@ const ProductDetails = ({ data }) => {
                     >
                       +
                     </button>
-                  </div>
+                  </div> */}
                   <div>
                     {click ? (
                       <AiFillHeart

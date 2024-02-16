@@ -3,3 +3,7 @@
 flex: 0 0 auto;
 width:auto !important;
 }}
+.corners{
+    border-radius: 10px !important;
+    box-shadow: 20px 20px gray 0.6 !important;
+}
