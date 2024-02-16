@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './forgotpwd.css'
 import { toast } from "react-toastify";
+import { server } from "../../server";
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -15,7 +16,7 @@ const ForgotPassword = () => {
     // Add your password reset logic here, for now, let's just show a message
     try {
         // Make API call to send the password reset email
-        const response = await axios.post('http://localhost:8000/api/v2/user/forgot-password', { email });
+        const response = await axios.post(`${server}/user/forgot-password`, { email });
   
         // Handle the response, display a success message, or show an error notification
         toast.success(response.data);

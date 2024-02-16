@@ -74,6 +74,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './forgotpwd.css';
+import { server } from "../../server";
+import { toast } from "react-toastify";
 
 const ResetPasswordForm = ({ token }) => {
   const [newPassword, setNewPassword] = useState('');
@@ -91,13 +93,14 @@ const ResetPasswordForm = ({ token }) => {
 
     try {
       // Make API call to update the password
-      const response = await axios.post(`http://localhost:8000/api/v2/user/reset-password/${token}`, {
+      const response = await axios.post(`${server}/user/reset-password/${token}`, {
         newPassword,
       });
-
+       toast.success("Password changed successfully");
       // Handle the response, display a success message, or navigate to a success page
       setMessage(response.data);
     } catch (error) {
+      toast.error(error);
       console.error(error);
       // Handle error, display an error message, or show an error notification
       setMessage('An error occurred while resetting the password.');
