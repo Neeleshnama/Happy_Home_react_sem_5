@@ -19,6 +19,7 @@ const AllProducts = () => {
   }, [dispatch]);
 
   const handleDelete = (id) => {
+    console.log(id);
     dispatch(deleteProduct(id));
     window.location.reload();
   };
@@ -108,7 +109,7 @@ const AllProducts = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="w-full mx-8 pt-1 mt-10 bg-white">
+        <div className="w-full mx-8 pt-1 mt-10 bg-blue-100">
           <DataGrid
             rows={row}
             columns={columns}

@@ -78,7 +78,7 @@ const AllEvents = () => {
     });
 
   return (
-    <div className="w-full mx-8 pt-1 mt-10 bg-white">
+    <div className="w-full mx-8 pt-1 mt-10 bg-blue-100">
       <DataGrid
         rows={row}
         columns={columns}

@@ -113,10 +113,10 @@ const AllSellers = () => {
     });
 
   return (
-    <div className="w-full flex justify-center pt-5">
+    <div className="w-full flex justify-center pt-5 bg-blue-100">
       <div className="w-[97%]">
         <h3 className="text-[22px] font-Poppins pb-2">All Users</h3>
-        <div className="w-full min-h-[45vh] bg-white rounded">
+        <div className="w-full min-h-[45vh]  rounded">
           <DataGrid
             rows={row}
             columns={columns}
@@ -127,7 +127,7 @@ const AllSellers = () => {
         </div>
         {open && (
           <div className="w-full fixed top-0 left-0 z-[999] bg-[#00000039] flex items-center justify-center h-screen">
-            <div className="w-[95%] 800px:w-[40%] min-h-[20vh] bg-white rounded shadow p-5">
+            <div className="w-[95%] 800px:w-[40%] min-h-[20vh]  rounded shadow p-5">
               <div className="w-full flex justify-end cursor-pointer">
                 <RxCross1 size={25} onClick={() => setOpen(false)} />
               </div>

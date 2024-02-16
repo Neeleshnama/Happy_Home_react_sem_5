@@ -79,12 +79,12 @@ const Categories = () => {
       marginRight: "16px",
      }} />
      
-      <h2 style={{ margin: "15px" , fontSize:"1.75rem"}} >{i.title}</h2>
+      <h2 className=" h-16 " style={{ margin: "15px" , fontSize:"1.75rem"}} >{i.title}</h2>
     </div>
-    <p style={{ marginTop: "-2px", marginBottom: "16px" }}>
+    <p className=" h-16 " style={{ marginTop: "-2px", marginBottom: "16px" }}>
       Some text describing the card. You can customize this as needed.
     </p>
-    <button style={{ marginTop:"10px",padding: "10px 20px", backgroundColor: "rgb(30 58 138)", color: "white", borderRadius: "4px", border: "none", cursor: "pointer" }}
+    <button className="h-12"style={{ marginTop:"10px",padding: "10px 20px", backgroundColor: "rgb(30 58 138)", color: "white", borderRadius: "4px", border: "none", cursor: "pointer" }}
     onClick={() => handleSubmit(i)}>
       See More
     </button>

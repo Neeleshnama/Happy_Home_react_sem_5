@@ -145,7 +145,13 @@ const Login = () => {
               <Link to="/sign-up" className="text-blue-600 pl-2">
                 Sign Up
               </Link>
+              <Link to="/" className=" ml-52 text-blue-600 pl-2">
+                 Back
+              </Link>
             </div>
+          
+              
+           
           </form>
         </div>
       </div>
