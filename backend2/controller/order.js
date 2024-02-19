@@ -127,6 +127,7 @@ router.put(
 
         product.stock -= qty;
         product.sold_out += qty;
+        console.log(product.sold_out);
 
         await product.save({ validateBeforeSave: false });
       }

@@ -20,6 +20,59 @@ import Ratings from "./Ratings";
 import axios from "axios";
 import PackageTable from "../Packages/PackageTable";
 
+const allPackagesData = {
+  furnitureandrepair: [
+  { name: 'Basic', description: 'Minor repairs and touch-ups', price: 300 },
+  { name: 'Standard', description: 'Moderate repairs and restoration', price: 500 },
+  { name: 'Premium', description: 'Extensive repairs and refurbishment', price: 1000 },
+],
+TherapySessions: [
+  { name: 'Basic', description: '30-minute session. ', price: 300 },
+  { name: 'Standard', description: '60-minute session and basic aromatherapy. ', price: 500 },
+  { name: 'Premium', description: '90-minute session, aromatherapy, and hot stone massage. ', price: 1000 },
+],
+appliancerepair: [
+  { name: 'Basic', description: 'Minor repairs such as fixing a garbage disposal or leaking pipes. ', price: 300 },
+  { name: 'Standard', description: 'Moderate repairs such as repairing a water heater or dishwasher. ', price: 500 },
+  { name: 'Premium', description: 'Extensive repairs such as replacing a refrigerator compressor or oven heating element. ', price: 1000 },
+],
+Plumbingservices: [
+  { name: 'Basic', description: 'Minor repairs such as fixing leaks and clogs.', price: 200 },
+  { name: 'Standard', description: 'Moderate repairs and restoration such as repairing burst pipes and clearing clogs.', price: 400 },
+  { name: 'Premium', description: 'Extensive repairs and refurbishment such as water damage repair and main line water leak repair. ', price: 800 },
+],
+painting: [
+  { name: 'Basic', description: 'Minor touch-ups and small areas such as a single room or accent wall.', price: 300 },
+  { name: 'Standard', description: 'Moderate painting jobs such as a full room or exterior of a small house.', price: 500 },
+  { name: 'Premium', description: 'Extensive painting jobs such as the entire interior or exterior of a large house or commercial building. ', price: 1000 },
+],
+menssaloon: [
+  { name: 'Basic', description: 'Haircut and beard trim.', price: 300 },
+  { name: 'Standard', description: 'Haircut, beard trim, and basic facial.', price: 500 },
+  { name: 'Premium', description: 'Haircut, beard trim, facial, and scalp massage. ', price: 1000 },
+],
+womenssaloon:[
+  { name: 'Basic', description: 'Haircut and blowout. ', price: 300 },
+  { name: 'Standard', description: 'Haircut, blowout, and basic manicure. ', price: 500 },
+  { name: 'Premium', description: 'Haircut, blowout, manicure, and pedicure. ', price: 1000 },
+],
+Massageandspa: [
+  { name: 'Basic', description: '30-minute massage. ', price: 300 },
+  { name: 'Standard', description: '60-minute massage and basic facial.', price: 500 },
+  { name: 'Premium', description: '90-minute massage, facial, and body scrub. ', price: 1000 },
+],
+housecleaning: [
+  { name: 'Basic', description: 'Light cleaning such as dusting and vacuuming.', price: 300 },
+  { name: 'Standard', description: 'Moderate cleaning such as bathrooms and kitchen.', price: 500 },
+  { name: 'Premium', description: 'Deep cleaning such as baseboards, windows, and appliances.', price: 1000 },
+],
+unisex:[
+  { name: 'Basic', description: 'Haircut', price: 400 },
+  { name: 'Standard', description: 'Haircut and basic facial. ', price: 600 },
+  { name: 'Premium', description: 'Haircut, facial, and scalp massage. ', price: 1000 },
+],
+};
+
 const ProductDetails = ({ data }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const { cart } = useSelector((state) => state.cart);
@@ -34,8 +87,11 @@ const ProductDetails = ({ data }) => {
 
   const handlePackageSelection = (index) => {
     setSelectedPackageIndex(index);
+    console.log(index);
     setCount(index);
+    
   };
+ 
   useEffect(() => {
     dispatch(getAllProductsShop(data && data?.shop._id));
     if (wishlist && wishlist.find((i) => i._id === data?._id)) {
@@ -161,7 +217,7 @@ const ProductDetails = ({ data }) => {
                   </h3>
                 </div>
                 <div>
-                  <PackageTable category={data.category} onSelectPackage={handlePackageSelection} />
+                  <PackageTable category={data.category} onSelectPackage={handlePackageSelection} price={data.discountPrice} />
                 </div>
                 {/* <h3>{selectedPackageIndex}</h3> */}
 

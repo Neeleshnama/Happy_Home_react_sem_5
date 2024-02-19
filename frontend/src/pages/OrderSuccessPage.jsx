@@ -26,7 +26,7 @@ const Success = () => {
   return (
     <div>
       <Lottie options={defaultOptions} width={300} height={300} />
-      <h5 className="text-center mb-14 text-[25px] text-[#000000a1]" style={{color:'white'}}>
+      <h5 className="text-center mb-14 text-[25px] text-[#000000a1]" style={{color:'black'}}>
         Your booking is successful 😍
         <br />
         please check your profile for status and other booking information
