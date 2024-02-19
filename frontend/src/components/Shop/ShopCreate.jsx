@@ -29,6 +29,7 @@ const ShopCreate = () => {
         zipCode,
         address,
         phoneNumber,
+        verified: false,
       })
       .then((res) => {
         toast.success(res.data.message);

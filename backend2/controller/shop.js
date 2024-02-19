@@ -4,7 +4,7 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
 const Shop = require("../model/shop");
-const { isAuthenticated, isSeller, isAdmin } = require("../middleware/auth");
+const { isAuthenticated, isSeller, isAdmin, isverified } = require("../middleware/auth");
 const cloudinary = require("cloudinary");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
@@ -123,6 +123,11 @@ router.post(
       if (!user) {
         return next(new ErrorHandler("User doesn't exists!", 400));
       }
+      if(!user.verified) {
+        
+        return next(new ErrorHandler("your verification is under review! we will reach you shortly", 400));
+
+      }
 
       const isPasswordValid = await user.comparePassword(password);
 
@@ -134,6 +139,7 @@ router.post(
 
       sendShopToken(user, 201, res);
     } catch (error) {
+      alert(error.message);
       return next(new ErrorHandler(error.message, 500));
     }
   })
@@ -146,9 +152,13 @@ router.get(
   catchAsyncErrors(async (req, res, next) => {
     try {
       const seller = await Shop.findById(req.seller._id);
-
-      if (!seller) {
-        return next(new ErrorHandler("User doesn't exists", 400));
+    // 
+      if (!seller ) {
+        return next(new ErrorHandler("seller doesn't exists ", 400));
+      }
+      if (seller.verified === false) {
+        
+        return next(new ErrorHandler("seller  not verified ", 400));
       }
 
       res.status(200).json({
@@ -156,6 +166,7 @@ router.get(
         seller,
       });
     } catch (error) {
+      alert(error.message);
       return next(new ErrorHandler(error.message, 500));
     }
   })
@@ -284,6 +295,74 @@ router.get(
     }
   })
 );
+
+// -- admin seller approval
+
+// Update seller verification status
+router.put('/approve-seller/:id',
+ async (req, res) => {
+  try {
+    const seller = await Shop.findById(req.params.id);
+    if (!seller) {
+      return res.status(404).json({ message: 'Seller not found' });
+    }
+    if (seller.verified) {
+      return res.status(400).json({ message: 'Seller is already verified' });
+    }
+    seller.verified = true;
+    await seller.save();
+    res.json({ message: 'Seller verified successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+// Fetch all verified sellers
+router.get('/verified',isAuthenticated,
+isAdmin("Admin"), async (req, res) => {
+  try {
+    const sellers = await Shop.find({ verified: true });
+    res.json(sellers);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Fetch all not verified sellers
+router.get('/notverified',isAuthenticated,
+isAdmin("Admin"), async (req, res) => {
+  try {
+    const sellers = await Shop.find({ verified: false });
+    res.json(sellers);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.put('/reject-seller/:id', async (req, res) => {
+  try {
+    const seller = await Shop.findById(req.params.id);
+    if (!seller) {
+      return res.status(404).json({ message: 'Seller not found' });
+    }
+    if (!seller.verified) {
+      return res.status(400).json({ message: 'Seller is already unverified' });
+    }
+    seller.verified = false;
+    await seller.save();
+    res.json({ message: 'Seller rejected successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+
+
+
+
+
 
 // delete seller ---admin
 router.delete(
