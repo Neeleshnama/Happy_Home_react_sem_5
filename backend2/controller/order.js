@@ -102,7 +102,7 @@ router.put(
       }
       if (req.body.status === "Transferred to delivery partner") {
         order.cart.forEach(async (o) => {
-          await updateOrder(o._id, o.qty);
+          //await updateOrder(o._id, o.qty);
         });
       }
 
@@ -113,6 +113,9 @@ router.put(
         order.paymentInfo.status = "Succeeded";
         const serviceCharge = order.totalPrice * .10;
         await updateSellerInfo(order.totalPrice - serviceCharge);
+        order.cart.forEach(async (o) => {
+          await updateOrder(o._id, o.qty);
+        });
       }
 
       await order.save({ validateBeforeSave: false });
