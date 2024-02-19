@@ -2,7 +2,9 @@ dependencies
 # backend/config/.env
 frontend/node_modules
 # backend/node_modules
-socket/node_modules
+
+socket
+
 backend
 frontend/public/project.mp4
 frontend/node_modules/.cache/default-development/18.pack
@@ -17,3 +19,5 @@ build
 .vercel
 .firebaserc
 firebase.json
+
+
