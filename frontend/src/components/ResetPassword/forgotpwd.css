@@ -5,7 +5,7 @@ input {
   border: 2px solid gray;
 }
 .bg-image{
-  background: url("../../images/home.png");
+ 
   background-size: cover;
   background-repeat: no-repeat;
   position: absolute;
@@ -59,7 +59,7 @@ input {
   margin-top: 10px;
   font-weight: 900;
   font-size: 1.8rem;
-  color: #1DA1F2;
+  color: #0D47A1;
   letter-spacing: 1px;
 }
 
@@ -103,7 +103,7 @@ input {
 .fpwd button {
   color: white;
   margin-top: 20px;
-  background: #1DA1F2;
+  background: #0D47A1;
   height: 40px;
   border-radius: 20px;
   cursor: pointer;

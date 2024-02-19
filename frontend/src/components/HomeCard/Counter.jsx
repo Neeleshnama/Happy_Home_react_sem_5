@@ -1,4 +1,4 @@
-import { animate } from "framer-motion";
+
 import {useEffect,useRef} from "react";
 import RevealOnScroll from "../RevealOnScroll/RevealOnScroll"
 function abbreviateNumber(value) {
@@ -12,23 +12,12 @@ function abbreviateNumber(value) {
   return value.toFixed(1) + suffixes[magnitude];
 }
 
-const Counter=({ to })=>{
+const Counter=(props)=>{
   const nodeRef = useRef();
 
-  useEffect(() => {
-    const node = nodeRef.current;
+  
 
-    const controls = animate(0, to, {
-      duration: 1,
-      onUpdate(value) {
-        node.textContent = abbreviateNumber(value);
-      },
-    });
-
-    return () =>  controls.stop();
-  }, [to]);
-
-  return <RevealOnScroll> <h2 className="text-black font-bold text-5xl" style={{backgroundColor: "rgb(239 246 255)"}} ref={nodeRef} /></RevealOnScroll>;
+  return <RevealOnScroll> <h2 className="text-black font-bold text-5xl" style={{backgroundColor: "rgb(239 246 255)"}} ref={nodeRef} >{props.number}</h2></RevealOnScroll>;
 }
 
 export default Counter;

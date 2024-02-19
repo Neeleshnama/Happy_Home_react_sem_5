@@ -156,7 +156,7 @@ const ProductCard = ({ data,isEvent }) => {
             <div className="d-flex justify-content-between">
               <p className="small">
               <Link to={`/shop/preview/${data?.shop._id}`}>
-        <h5 className=" w-36  text-base">{data.shop.name}</h5>
+        <h5 className=" w-36 h-30 text-base">{data.shop.name}</h5>
       </Link>
               </p>
               <p className="small text-danger">
@@ -165,7 +165,7 @@ const ProductCard = ({ data,isEvent }) => {
             </div>
 
             <div className="d-flex justify-content-between mb-3">
-            <h4 className="pb-3 font-[500] w-36">
+            <h4 className="pb-3 font-[500] h-20 w-36">
           {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
         </h4>
               <h4 >

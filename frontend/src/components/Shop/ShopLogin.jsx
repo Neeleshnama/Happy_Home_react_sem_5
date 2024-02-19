@@ -143,8 +143,11 @@ const ShopLogin = () => {
             </div>
             <div className={`${styles.noramlFlex} w-full`}>
               <h4>Not have any account?</h4>
-              <Link to="/shop-create" className="text-blue-600 pl-2">
+              <Link to="/shop-create" className="text-blue-600 pl-1.5">
                 Sign Up
+              </Link>
+              <Link to="/" className=" ml-52 text-blue-600 pl-2">
+                 Back
               </Link>
             </div>
           </form>
