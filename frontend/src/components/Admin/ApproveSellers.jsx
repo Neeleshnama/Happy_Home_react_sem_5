@@ -192,6 +192,7 @@ const ApproveSellers = () => {
   const { sellers } = useSelector((state) => state.seller);
   const [open, setOpen] = useState(false);
   const [userId, setUserId] = useState("");
+  const [filterOption, setFilterOption] = useState("all");
 
   useEffect(() => {
     dispatch(getAllSellers());
@@ -309,45 +310,49 @@ const ApproveSellers = () => {
         status: item.verified // assuming 'status' is a property in your seller object
       });
     });
-
-  // Filter approved and rejected sellers
+     // Filter approved and rejected sellers
   const approvedSellers = row.filter((seller) => seller.status === true);
   const rejectedSellers = row.filter((seller) => seller.status === false);
   const notApprovedSellers = row.filter((seller) => !seller.status);
 
+    const filteredSellers = row.filter((seller) => {
+      if (filterOption === "approved") {
+        return seller.status === true;
+      } else if (filterOption === "rejected") {
+        return seller.status === false;
+      } else {
+        return true;
+      }
+    });
+
+ 
+
   return (
     <div className="w-full flex justify-center pt-5 bg-blue-100">
       <div className="w-[97%]">
-        <h3 className="text-[22px] font-Poppins pb-2">New Sellers</h3>
-        <div className="w-full min-h-[45vh]  rounded">
+     
+        {/* Add filter options */}
+        <select
+  value={filterOption}
+  onChange={(e) => setFilterOption(e.target.value)}
+  className=" w-64 mb-3 px-2 py-1 border rounded-md"
+  style={{ backgroundColor: "#f3f4f6", color: "#4b5563" }}
+>
+  <option value="all">All Sellers</option>
+  <option value="approved">Approved Sellers</option>
+  <option value="rejected">Rejected Sellers</option>
+</select>
+
+        <div className="w-full min-h-[45vh] rounded">
           <DataGrid
-            rows={notApprovedSellers}
+            rows={filteredSellers}
             columns={columns}
             pageSize={10}
             disableSelectionOnClick
             autoHeight
           />
         </div>
-        <h3 className="text-[22px] font-Poppins pb-2">Approved Sellers</h3>
-        <div className="w-full min-h-[45vh]  rounded">
-          <DataGrid
-            rows={approvedSellers}
-            columns={columns}
-            pageSize={10}
-            disableSelectionOnClick
-            autoHeight
-          />
-        </div>
-        <h3 className="text-[22px] font-Poppins pb-2">Rejected Sellers</h3>
-        <div className="w-full min-h-[45vh]  rounded">
-          <DataGrid
-            rows={rejectedSellers}
-            columns={columns}
-            pageSize={10}
-            disableSelectionOnClick
-            autoHeight
-          />
-        </div>
+     
         {open && (
           <div className="w-full fixed top-0 left-0 z-[999] bg-[#00000039] flex items-center justify-center h-screen">
             <div className="w-[95%] 800px:w-[40%] min-h-[20vh]  rounded shadow p-5">
