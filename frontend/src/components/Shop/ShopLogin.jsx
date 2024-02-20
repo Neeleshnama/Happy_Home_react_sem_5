@@ -36,7 +36,7 @@ const ShopLogin = () => {
 
   return (
     <div className="min-h-screen bg-blue-100 flex justify-center py-12 sm:px-6 lg:px-8" >
-      <div className="w-1/2 p-8 ml-20 mt-48 font-extrabold text-6xl" >
+      <div className="w-1/2 p-8 ml-20 mt-40 font-extrabold text-6xl" >
       <div className="text-blue-900" >
           <h1>The best offer for</h1>
        
@@ -45,14 +45,11 @@ const ShopLogin = () => {
          
         </div>
         <p className=" text-lg text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            voluptatum,<br/>quibusdam, quia, voluptate quod quos quae voluptatibus
-            dolorum natus quas quidem?<br/> Quisquam voluptatum, quibusdam, quia,
-            voluptate quod quos quae voluptatibus<br/> dolorum natus quas quidem?
+        At Happy Home, we provide top-quality home services, including<br/> cleaning, maintenance, repairs, renovations, landscaping,<br/> and gardening. Our skilled professionals are dedicated to ensuring<br/> your home is clean, comfortable, and well-maintained. With our reliable <br/>services and friendly team,you can trust us to take care of your home<br/> needs. Sign up now to experience the joy of a Happy Home!
 
           </p>
       </div>
-      <div className=" w-5/12 p-4 -ml-26 mt-44">
+      <div className=" w-5/12 p-4 -ml-26 mt-40">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
         <h2 className="mb-6 mt-6 text-center text-3xl font-extrabold text-gray-900">
           Login to your shop

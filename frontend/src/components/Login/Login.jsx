@@ -45,10 +45,7 @@ const Login = () => {
          
         </div>
         <p className=" text-lg text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            voluptatum,<br/>quibusdam, quia, voluptate quod quos quae voluptatibus
-            dolorum natus quas quidem?<br/> Quisquam voluptatum, quibusdam, quia,
-            voluptate quod quos quae voluptatibus<br/> dolorum natus quas quidem?
+           At Happy Home, we provide top-quality home services, including<br/> cleaning, maintenance, repairs, renovations, landscaping,<br/> and gardening. Our skilled professionals are dedicated to ensuring<br/> your home is clean, comfortable, and well-maintained. With our reliable <br/>services and friendly team,you can trust us to take care of your home<br/> needs. Sign up now to experience the joy of a Happy Home!
 
           </p>
       </div>
