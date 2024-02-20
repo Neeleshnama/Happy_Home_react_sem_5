@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
 
-input {
-  caret-color: red;
-  border: 2px solid gray;
-}
 .bg-image{
  
   background-size: cover;
@@ -72,10 +68,10 @@ input {
   display: block;
   width: 100%;
   padding: 0;
-  border: none;
+ 
   outline: none;
   box-sizing: border-box;
-  color: red;
+  
 }
 
 .fpwd label {
