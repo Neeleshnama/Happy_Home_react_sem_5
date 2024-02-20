@@ -106,7 +106,7 @@ import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { server } from "../../server";
-import { VictoryPie, VictoryLine, VictoryChart, VictoryAxis, VictoryTooltip, VictoryVoronoiContainer } from "victory";
+
 
 const AllProducts = () => {
   const [data, setData] = useState([]);

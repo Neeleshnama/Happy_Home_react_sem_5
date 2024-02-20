@@ -5,14 +5,14 @@ import { FiPackage, FiShoppingBag } from 'react-icons/fi'
 import { MdOutlineLocalOffer } from 'react-icons/md'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import happyHome from "./../../images/happyhome.png"
+import happyHome from "./../../images/HappyHomelogo.png"
 
 const AdminHeader = () => {
     const {user} = useSelector((state) => state.user);
 
   return (
          <div className="w-full h-[80px] bg-[#3321c8] shadow sticky top-0 left-0 z-30 flex items-center justify-between px-4">
-      <div className=" h-32 w-32 mt-8">
+      <div className=" h-30 w-28  ">
         <Link to="/">
         <img
                 src={happyHome} // Update the src attribute
