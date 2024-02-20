@@ -1,0 +1,10 @@
+a request to /stripeapikey arrived on 2024-02-20 09:09:35 and this is method GET server took 4.648 to reply this request with a status code 304
+a request to /api/v2/event/get-all-events arrived on 2024-02-20 09:09:35 and this is method GET server took 20.241 to reply this request with a status code 404
+a request to /get-all-products arrived on 2024-02-20 09:09:35 and this is method GET server took 263.159 to reply this request with a status code 201
+a request to /getSeller arrived on 2024-02-20 09:09:35 and this is method GET server took 537.035 to reply this request with a status code 304
+a request to /getuser arrived on 2024-02-20 09:09:35 and this is method GET server took 568.698 to reply this request with a status code 304
+a request to /stripeapikey arrived on 2024-02-20 09:10:33 and this is method GET server took 1.675 to reply this request with a status code 304
+a request to /api/v2/event/get-all-events arrived on 2024-02-20 09:10:33 and this is method GET server took 24.052 to reply this request with a status code 404
+a request to /get-all-products arrived on 2024-02-20 09:10:34 and this is method GET server took 284.454 to reply this request with a status code 201
+a request to /getSeller arrived on 2024-02-20 09:10:34 and this is method GET server took 479.857 to reply this request with a status code 304
+a request to /getuser arrived on 2024-02-20 09:10:34 and this is method GET server took 516.707 to reply this request with a status code 304
