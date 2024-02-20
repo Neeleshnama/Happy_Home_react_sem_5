@@ -95,15 +95,30 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
   const [value, setValue] = useState(data.qty);
   const totalPrice = data.discountPrice * value;
 
+  // const increment = (data) => {
+  //   if (data.stock < value) {
+  //     toast.error("Service slots are all booked please try later!");
+  //   } else {
+  //     setValue(value + 1);
+  //     const updateCartData = { ...data, qty: value + 1 };
+  //     quantityChangeHandler(updateCartData);
+  //   }
+  // };
+
   const increment = (data) => {
-    if (data.stock < value) {
-      toast.error("Product stock limited!");
+    if (value < 3) {
+      if (data.stock < value) {
+        toast.error("Service slots are all booked please try later!");
+      } else {
+        setValue(value + 1);
+        const updateCartData = { ...data, qty: value + 1 };
+        quantityChangeHandler(updateCartData);
+      }
     } else {
-      setValue(value + 1);
-      const updateCartData = { ...data, qty: value + 1 };
-      quantityChangeHandler(updateCartData);
+      toast.error("Maximum quantity reached!");
     }
   };
+
 
   const decrement = (data) => {
     setValue(value === 1 ? 1 : value - 1);
@@ -137,8 +152,21 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
         <div className="pl-[5px]">
           <h1>{data.name}</h1>
           <h4 className="font-[400] text-[15px] text-[#00000082]">
-            ${data.discountPrice} * {value}
+          ₹{data.discountPrice} * {value}
           </h4>
+          {value === 2 ? (
+    <h4 className="font-[400] text-[15px] text-[#00000082]">
+      <h5>Standard Package</h5>
+    </h4>
+  ) : value === 3 ? (
+    <h4 className="font-[400] text-[15px] text-[#00000082]">
+     <h5>Premium Package</h5>
+    </h4>
+  ) : (
+    <h4 className="font-[400] text-[15px] text-[#00000082]">
+     <h5>Basic Package</h5>
+    </h4>
+  )}
           <h4 className="font-[600] text-[17px] pt-[3px] text-[#d02222] font-Roboto">
             ₹{totalPrice}
           </h4>

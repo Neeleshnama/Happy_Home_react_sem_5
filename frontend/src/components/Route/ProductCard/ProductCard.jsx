@@ -166,7 +166,7 @@ const ProductCard = ({ data,isEvent }) => {
 
             <div class="d-flex justify-content-between mb-2">
               <p class="text-muted mb-0 text-green w-36">
-               slots: <span class="fw-bold text-danger"> {data?.sold_out*(1) }&nbsp;booked</span>
+                <span class="fw-bold text-danger"> {data?.sold_out }&nbsp;booked</span>
               </p>
               <div class="ms-auto text-warning">
               <Ratings rating={data?.ratings} />
