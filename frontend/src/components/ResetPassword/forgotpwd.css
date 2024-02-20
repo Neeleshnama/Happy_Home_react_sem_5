@@ -1,18 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
 
 .bg-image{
- 
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-color: #BBDEFB;
+  
   position: absolute;
   top: 0px;
   z-index: 0;
   /* Full height */
-  height: 800px; 
+  height: 880px; 
   width: 100%;
-  /* Add the blur effect */
-  filter: blur(8px);
-  -webkit-filter: blur(8px);
+
   /* Center and scale the image nicely */
   background-position: center;
   
@@ -22,18 +19,18 @@
   /* position: relative; */
   position: absolute;
   top: 50%;
-  left: 40%;
-  width: 350px;
+  left: 35%;
+  width: 550px;
   height: 500px;
   border-radius: 20px;
   padding: 40px;
   box-sizing: border-box;
-  background: #ecf0f3;
+  background:white ;
   
   backface-visibility: 0.4;
   background-size: cover;
   background-repeat: no-repeat;
-  box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+
   top: 150px;
   z-index: 1;
 }

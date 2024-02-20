@@ -11,7 +11,7 @@ import {
   footerProductLinks,
   footerSupportLinks,
 } from "../../static/data";
-import happyHome from "./../../images/happyhome.png"
+import happyHome from "./../../images/HappyHomelogo.png"
 const Footer = () => {
   return (
       <div className="mt-20">
@@ -42,7 +42,7 @@ const Footer = () => {
             className=" w-40"
             src={happyHome}
             alt=""
-            style={{ filter: "brightness(5) invert(2)" }}
+           
           />
           <br />
           <p>The home and elements needeed to create beatiful products.</p>

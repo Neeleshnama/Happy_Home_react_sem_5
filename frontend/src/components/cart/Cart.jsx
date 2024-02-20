@@ -76,7 +76,7 @@ const Cart = ({ setOpenCart }) => {
               {/* checkout buttons */}
               <Link to="/checkout">
                 <div
-                  className={`h-[45px] flex items-center justify-center w-[100%] bg-[#e44343] rounded-[5px]`}
+                  className={`h-[45px] flex items-center justify-center w-[100%] bg-[#1e3a8a] rounded-[5px]`}
                 >
                   <h1 className="text-[#fff] text-[18px] font-[600]">
                     Book Now ₹{totalPrice}
@@ -131,17 +131,17 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
       <div className="w-full flex items-center">
         <div>
           <div
-            className={`bg-[#e44343] border border-[#e4434373] rounded-full w-[25px] h-[25px] ${styles.noramlFlex} justify-center cursor-pointer`}
+            className={`bg-[#1e3a8a] border border-[#e4434373] rounded-full w-[25px] h-[25px] ${styles.noramlFlex} justify-center cursor-pointer`}
             onClick={() => increment(data)}
           >
             <HiPlus size={18} color="#fff" />
           </div>
           <span className="pl-[10px]">{data.qty}</span>
           <div
-            className="bg-[#a7abb14f] rounded-full w-[25px] h-[25px] flex items-center justify-center cursor-pointer"
+            className="bg-[#1e3a8a] rounded-full w-[25px] h-[25px] flex items-center justify-center cursor-pointer"
             onClick={() => decrement(data)}
           >
-            <HiOutlineMinus size={16} color="#7d879c" />
+            <HiOutlineMinus size={16} color="#fff" />
           </div>
         </div>
         <img

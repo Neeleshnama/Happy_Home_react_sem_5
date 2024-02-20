@@ -56,7 +56,7 @@ const Header = ({ activeHeading }) => {
     <>
       <div className={`${styles.section}`} >
       <div className="hidden 800px:h-[50px] 800px:my-[20px] 800px:flex items-center justify-between">
-          <div className=" h-32 w-32 mt-8">
+          <div className=" h-30 w-32">
             <Link to="/">
               <img
                 src={happyHome} // Update the src attribute

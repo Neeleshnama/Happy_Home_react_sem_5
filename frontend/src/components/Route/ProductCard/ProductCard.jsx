@@ -95,19 +95,7 @@ const ProductCard = ({ data,isEvent }) => {
           <div className="d-flex  p-3">
             <p className="lead mb-0 mr-3"> Combo Offer</p>
             
-            <div
-              className="bg-white rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
-              style={{ width: "35px", height: "35px" }}
-            > 
-            <div className="ribbion"><div class="box">
-  <div class="ribbon-2 ">{data.tags}</div>
-</div></div>
-            
-              {/* {data.tags!=undefined ?(<p className="text-white mb-0 small">{data.tags}</p>):('no')
-              } */}
-              {/* <p className="text-white mb-0 small">{data.tags}</p>
-               */}
-            </div>
+        
            
             {/* // wishlist item */}
             <div>
