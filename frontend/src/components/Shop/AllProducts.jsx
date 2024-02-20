@@ -259,11 +259,11 @@ const AllProducts = () => {
             disableSelectionOnClick
             autoHeight
           />
-          <h2 style={{color:'red'}}>Showing Number of Bookings of each service</h2>
-          <div style={{ marginTop: "20px", width: "50%" }}>
+          <h2 className="ml-[306px]"style={{color:'black'}}>Showing Number of Bookings of each service</h2>
+          <div style={{  width: "50%" }}>
             <VictoryPie
               data={chartData}
-              colorScale="qualitative"
+              colorScale="blue"
               labels={({ datum }) => datum.label}
               labelComponent={<VictoryTooltip />}
               style={{ labels: { fontSize: 10 } }}
