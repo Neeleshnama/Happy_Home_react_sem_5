@@ -8,6 +8,7 @@ import { HiOutlineUserGroup } from "react-icons/hi";
 import { BsHandbag } from "react-icons/bs";
 import { MdOutlineLocalOffer } from "react-icons/md";
 import { AiOutlineSetting } from "react-icons/ai";
+import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 
 const AdminSideBar = ({ active }) => {
   return (
@@ -154,7 +155,7 @@ const AdminSideBar = ({ active }) => {
           to="/admin-approve"
           className="w-full flex items-center"
         >
-          <AiOutlineSetting
+          <IoCheckmarkDoneCircleOutline 
             size={30}
             color={`${active === 9 ? "crimson" : "#555"}`}
           />
