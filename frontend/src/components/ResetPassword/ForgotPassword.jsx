@@ -42,10 +42,10 @@ const ForgotPassword = () => {
       </form>
       <p>{message.success ? 'Success: ' : ' '}{message.message}</p>  */}
 
-<div className="bg-image">hi</div>
+<div class='bg-image'></div>
 <div class="container ">
-  <div class="brand-logo"></div>
-  <div class="brand-title">Happy Home</div>
+
+  <div class="brand-title">Reset Your Password?<br/></div>
   <form onSubmit={handleSubmit}>
   <div class="inputs">
     <label>EMAIL <br />(Please enter your registered mail only)</label>

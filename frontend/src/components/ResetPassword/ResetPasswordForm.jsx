@@ -110,10 +110,9 @@ const ResetPasswordForm = ({ token }) => {
   return (
     <div>
       <div className='fpwd'>
-        <div className="bg-image">hi</div>
+       
         <div class="container ">
-          <div class="brand-logo"></div>
-          <div class="brand-title">Happy Home</div>
+          <div class="brand-title">Reset Your Password?<br/>Happy Home</div>
           <form onSubmit={handleSubmit}>
             <div class="inputs">
               <label>Create Password</label>
