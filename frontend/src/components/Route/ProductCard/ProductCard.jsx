@@ -93,12 +93,13 @@ const ProductCard = ({ data,isEvent }) => {
       <MDBCol md="12" lg="4" className="mb-4 mb-lg-0 h-80">
         <MDBCard>
           <div className="d-flex  p-3">
-            <p className="lead mb-0 mr-3"> Combo Offer</p>
+            <p className="lead mb-0 mr-3">Offers</p>
             
-        
+            
            
             {/* // wishlist item */}
             <div>
+            
           {click ? (
             <AiFillHeart
               size={22}
@@ -168,6 +169,10 @@ const ProductCard = ({ data,isEvent }) => {
               <p class="text-muted mb-0 text-green w-36">
                 <span class="fw-bold text-danger"> {data?.sold_out }&nbsp;booked</span>
               </p>
+
+
+
+              
               <div class="ms-auto text-warning">
               <Ratings rating={data?.ratings} />
               </div>
