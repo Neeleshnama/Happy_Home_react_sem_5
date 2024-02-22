@@ -98,7 +98,7 @@ const AdminDashboardMain = () => {
                 Total Earning
               </h3>
             </div>
-            <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">$  {adminBalance}</h5>
+            <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₹  {adminBalance}</h5>
           </div>
   
           <div className="w-full mb-4 800px:w-[30%] h-[20vh] bg-white shadow rounded px-2 py-5">

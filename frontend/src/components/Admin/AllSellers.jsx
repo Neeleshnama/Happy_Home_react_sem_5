@@ -91,9 +91,15 @@ const AllSellers = () => {
       renderCell: (params) => {
         return (
           <>
-            <Button onClick={() => setUserId(params.id) || setOpen(true)}>
+            {/* <Button onClick={() => setUserId(params.id) setOpen(true)}>
               <AiOutlineDelete size={20} />
-            </Button>
+            </Button> */}
+            <Button onClick={() => {
+  setUserId(params.id);
+  setOpen(true);
+}}>
+  <AiOutlineDelete size={20} />
+</Button>
           </>
         );
       },
@@ -132,7 +138,7 @@ const AllSellers = () => {
                 <RxCross1 size={25} onClick={() => setOpen(false)} />
               </div>
               <h3 className="text-[25px] text-center py-5 font-Poppins text-[#000000cb]">
-                Are you sure you wanna delete this user?
+                Are you sure you wanna delete this seller?
               </h3>
               <div className="w-full flex items-center justify-center">
                 <div

@@ -73,9 +73,15 @@ const AllUsers = () => {
       renderCell: (params) => {
         return (
           <>
-            <Button onClick={() => setUserId(params.id) || setOpen(true)}>
+            {/* <Button onClick={() => setUserId(params.id) || setOpen(true)}>
               <AiOutlineDelete size={20} />
-            </Button>
+            </Button> */}
+            <Button onClick={() => {
+  setUserId(params.id);
+  setOpen(true);
+}}>
+  <AiOutlineDelete size={20} />
+</Button>
           </>
         );
       },
