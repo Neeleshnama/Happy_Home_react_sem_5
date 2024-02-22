@@ -43,3 +43,5 @@ a request to /get-all-products arrived on 2024-02-22 05:35:30 and this is method
 a request to /getuser arrived on 2024-02-22 05:35:30 and this is method GET server took 1196.782 to reply this request with a status code 200
 a request to /update-avatar arrived on 2024-02-22 05:35:45 and this is method PUT server took 1934.421 to reply this request with a status code 200
 a request to /getuser arrived on 2024-02-22 05:35:46 and this is method GET server took 1198.536 to reply this request with a status code 304
+a request to /update-avatar arrived on 2024-02-22 05:37:50 and this is method PUT server took 8099.131 to reply this request with a status code 200
+a request to /getuser arrived on 2024-02-22 05:37:51 and this is method GET server took 1251.591 to reply this request with a status code 200
