@@ -31,7 +31,7 @@ const Categories = () => {
         className={` bg-blue-200 rounded-md mb-12`}
         id="categories"
       >
-     <div className='text-[27px] text-center pt-8 bg-blue-100 md:text-start text-white pb-[20px]'>
+     <div className='text-[27px] text-center pt-8 bg-blue-100 md:text-start text-white pb-[20px] justify-center items-center justify-between'>
           <h1 style={{
            color:"black",
            padding: "12px 19px",
@@ -40,7 +40,7 @@ const Categories = () => {
           <h1 className=" text-5xl px-4 pb-4 text-blue-900" 
            >Quality Services for Quality Homes</h1>
         </div>
-        <div className=" pl-14 grid grid-cols-1 bg-blue-100 gap-[5px] md:grid-cols-2 md:gap-[10px] lg:grid-cols-2 lg:gap-[20px] xl:grid-cols-4 ">
+        <div className=" pl-14 grid grid-cols-1 bg-blue-100 gap-[5px] md:grid-cols-2 md:gap-[10px] lg:grid-cols-2 lg:gap-[20px] xl:grid-cols-4  justify-center items-center justify-between ">
           {categoriesData &&
             categoriesData.map((i) => {
               const handleSubmit = (i) => {
@@ -82,11 +82,11 @@ const Categories = () => {
       <h2 className=" h-16 " style={{ margin: "15px" , fontSize:"1.75rem"}} >{i.title}</h2>
     </div>
     <p className=" h-16 " style={{ marginTop: "-2px", marginBottom: "16px" }}>
-      Some text describing the card. You can customize this as needed.
+      
     </p>
     <button className="h-12"style={{ marginTop:"10px",padding: "10px 20px", backgroundColor: "rgb(30 58 138)", color: "white", borderRadius: "4px", border: "none", cursor: "pointer" }}
     onClick={() => handleSubmit(i)}>
-      See More
+      Visit
     </button>
   </div>
               );

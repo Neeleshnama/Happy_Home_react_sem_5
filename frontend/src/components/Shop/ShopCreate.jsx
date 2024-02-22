@@ -302,7 +302,7 @@ const ShopCreate = () => {
 
   const validateZipCode = (zipCode) => {
     // Add your validation logic here for zip code
-    const zipRegex = /^\d{5}$/;
+    const zipRegex = /^\d{6}$/;
 
     return zipRegex.test(zipCode);
   };

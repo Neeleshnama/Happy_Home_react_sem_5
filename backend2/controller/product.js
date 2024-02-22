@@ -74,9 +74,9 @@ router.get(
 );
 
 // delete product of a shop
-router.delete(
+router.get(
   "/delete-shop-product/:id",
-  isSeller,
+ 
   catchAsyncErrors(async (req, res, next) => {
     try {
       const product = await Product.findById(req.params.id);
@@ -90,8 +90,8 @@ router.delete(
           product.images[i].public_id
         );
       }
-    
-      await product.remove();
+      await Product.deleteOne({ _id: req.params.id });
+     // await product.remove();
 
       res.status(201).json({
         success: true,

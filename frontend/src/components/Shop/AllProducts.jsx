@@ -124,6 +124,8 @@
 // };
 
 // export default AllProducts;
+
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@material-ui/core";
@@ -133,6 +135,8 @@ import { Link } from "react-router-dom";
 import { getAllProductsShop } from "../../redux/actions/product";
 import { deleteProduct } from "../../redux/actions/product";
 import Loader from "../Layout/Loader";
+import { server } from "../../server";
+import axios from "axios";
 import { VictoryPie ,VictoryChart, VictoryLine, VictoryAxis, VictoryTooltip} from "victory";
 const AllProducts = () => {
   const { products, isLoading } = useSelector((state) => state.products);
@@ -143,9 +147,24 @@ const AllProducts = () => {
     dispatch(getAllProductsShop(seller._id));
   }, [dispatch, seller._id]);
 
-  const handleDelete = (id) => {
-    dispatch(deleteProduct(id));
-    window.location.reload();
+  // const handleDelete = (id) => {
+  //   dispatch(deleteProduct(id));
+  //   window.location.reload();
+  // };
+  const handleDelete = async (id) => {
+    try {
+      // Make the axios request to delete the product
+      const response = await axios.get(`http://localhost:8000/api/v2/product/delete-shop-product/${id}`);
+      // Handle successful response
+      console.log('Product deleted successfully:', response.data);
+  
+      // If the deletion is successful, reload the page
+      
+    } catch (error) {
+      // Handle any errors here
+      console.error('Error deleting product:', error);
+      // You can show an error message to the user or handle the error in any other way
+    }
   };
 
   // Function to generate color based on index
@@ -236,7 +255,7 @@ const AllProducts = () => {
       });
     });
 
-  // Data for the pie chart
+  //Data for the pie chart
   const chartData = products
     .filter((product) => product.sold_out)
     .map((product, index) => ({

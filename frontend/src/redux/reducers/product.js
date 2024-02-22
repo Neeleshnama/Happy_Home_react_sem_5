@@ -38,6 +38,7 @@ export const productReducer = createReducer(initialState, {
   },
   deleteProductSuccess: (state, action) => {
     state.isLoading = false;
+    //state.products = action.payload;
     state.message = action.payload;
   },
   deleteProductFailed: (state, action) => {
