@@ -9,33 +9,35 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
 const sendToken = require("../utils/jwtToken");
-const multer = require("multer");
 const { isAuthenticated, isAdmin } = require("../middleware/auth");
+const multer= require('multer');
 
-const storage = multer.memoryStorage(); // Store files in memory
-const upload = multer({ storage: storage });
+const storage=multer.memoryStorage();
+const upload =multer({storage:storage});
 
 // create user
-router.post("/create-user", async (req, res, next) => {
+router.post("/create-user", upload.single('photo'),async (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
-    const avatar = req.file; 
+    const { name, email, password, avatar } = req.body;
     const userEmail = await User.findOne({ email });
 
     if (userEmail) {
       return next(new ErrorHandler("User already exists", 400));
     }
 
+    const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+      folder: "avatars",
+    });
 
-    const user =({
+    const user = {
       name: name,
       email: email,
       password: password,
       avatar: {
-        data: avatar.buffer, // Store file buffer in database
-        contentType: avatar.mimetype // Store file MIME type
-      }
-    });
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      },
+    };
 
     const activationToken = createActivationToken(user);
 
@@ -58,6 +60,7 @@ router.post("/create-user", async (req, res, next) => {
     return next(new ErrorHandler(error.message, 400));
   }
 });
+
 
 // create activation token
 const createActivationToken = (user) => {
@@ -226,29 +229,31 @@ router.put(
 router.put(
   "/update-avatar",
   isAuthenticated,
-  upload.single("avatar"), // Handle file upload using Multer
+  upload.single('photo'),
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const user = await User.findById(req.user.id);
-      
-      if (!user) {
-        return next(new ErrorHandler("User not found", 400));
-      }
+      let existsUser = await User.findById(req.user.id);
+      if (req.body.avatar !== "") {
+        const imageId = existsUser.avatar.public_id;
 
-      // Check if a new avatar file was uploaded
-      if (req.file) {
-        // Update avatar data in the user document
-        user.avatar = {
-          data: req.file.buffer, // Store file buffer in database
-          contentType: req.file.mimetype // Store file MIME type
+        await cloudinary.v2.uploader.destroy(imageId);
+
+        const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+          folder: "avatars",
+          width: 150,
+        });
+
+        existsUser.avatar = {
+          public_id: myCloud.public_id,
+          url: myCloud.secure_url,
         };
       }
 
-      await user.save();
+      await existsUser.save();
 
       res.status(200).json({
         success: true,
-        user: user,
+        user: existsUser,
       });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
