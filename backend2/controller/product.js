@@ -6,6 +6,7 @@ const Product = require("../model/product");
 const Shop = require("../model/shop");
 const cloudinary = require("cloudinary");
 const ErrorHandler = require("../utils/ErrorHandler");
+const Order = require("../model/Order");
 
 // create product
 router.post(
