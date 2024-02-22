@@ -60,8 +60,10 @@ unisex:[
 
 const PackageTable = ({ category, onSelectPackage, price }) => {
   const [selectedPackage, setSelectedPackage] = useState(null);
-
-  const categoryTrimmed = category.trim().replace(/\s+/g, ''); // Trim and remove spaces
+ // Trim whitespace and remove single quotes from category string
+  const categoryTrimmed = category.trim().replace(/\s+/g, '').replace(/'/g, ''); 
+  
+  //const categoryTrimmed = category.trim().replace(/\s+/g, ''); // Trim and remove spaces
   const packagesData = allPackagesData[categoryTrimmed];
 
   const handlePackageClick = (index) => {

@@ -235,14 +235,14 @@ export const navItems = [
     },
     {
       id: 4,
-      title: "mens saloon",//Cloths
+      title: "mens saloon",
       subTitle: "",
       image_Url:
         "https://res.cloudinary.com/dtqnwfxnx/image/upload/v1692030187/mens_saloon_xwooet.png",
     },
     {
       id: 5,
-      title: "women's saloon ",//Shoes
+      title: "womens saloon",//Shoes
       subTitle: "",
       image_Url:
         "https://res.cloudinary.com/dtqnwfxnx/image/upload/v1692030187/womens_saloon_um0jxi.png",
