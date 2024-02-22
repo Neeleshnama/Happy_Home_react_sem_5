@@ -227,16 +227,10 @@ const Signup = () => {
     
   };
 
+ 
+
   const handleFileInputChange = (e) => {
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setAvatar(reader.result);
-      }
-    };
-
-    reader.readAsDataURL(e.target.files[0]);
+    setAvatar(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
@@ -247,19 +241,31 @@ const Signup = () => {
       return;
     }
 
-    axios
-      .post(`${server}/user/create-user`, { name, email, password, avatar })
-      .then((res) => {
-        toast.success(res.data.message);
-        setName("");
-        setEmail("");
-        setPassword("");
-        setAvatar(null);
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-      });
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("avatar", avatar);
+  console.log("image",formData.get('avatar'));
+  axios
+  .post(`${server}/user/create-user`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  })
+  .then((res) => {
+    toast.success(res.data.message);
+    setName("");
+    setEmail("");
+    setPassword("");
+    setAvatar(null);
+  })
+  .catch((error) => {
+    toast.error(error.response.data.message);
+  });
   };
+
+  console.log(avatar);
 
   return (
     <div className="min-h-screen bg-blue-200 flex justify-center py-12 sm:px-6 lg:px-8">
@@ -277,7 +283,7 @@ const Signup = () => {
           <h2 className="mt-4 mb-6 text-center text-3xl font-extrabold text-gray-900">
             Register as a new user
           </h2>
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form action='/create-user' method='post'className="space-y-6"enctype="multipart/form-data" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="email"
@@ -373,10 +379,7 @@ const Signup = () => {
                   className="absolute right-9 top-2 cursor-pointer text-green-500"
                      size={25}/>
                 ) : (
-                  // <AiOutlineEyeInvisible
-                  //   className="absolute right-2 top-2 cursor-pointer text-red-500"
-                  //   size={25}
-                  // />
+                 
                   <MdError
                   className="absolute right-9 top-2 cursor-pointer text-red-500"
                      size={25}/>
@@ -406,7 +409,7 @@ const Signup = () => {
                 <span className="inline-block h-8 w-8 rounded-full overflow-hidden">
                   {avatar ? (
                     <img
-                      src={avatar}
+                      src={URL.createObjectURL(avatar)}
                       alt="avatar"
                       className="h-full w-full object-cover rounded-full"
                     />

@@ -13,12 +13,18 @@ const { isAuthenticated, isAdmin } = require("../middleware/auth");
 const multer= require('multer');
 
 const storage=multer.memoryStorage();
-const upload =multer({storage:storage});
+const upload = multer({ storage:storage }).single('avatar');
 
 // create user
-router.post("/create-user", upload.single('photo'),async (req, res, next) => {
+router.post("/create-user", upload,async (req, res, next) => {
   try {
-    const { name, email, password, avatar } = req.body;
+    const { name, email, password } = req.body;
+    console.log(req.file);
+    // const avatar = req.file.buffer.toString("base64");
+
+    const b64 = Buffer.from(req.file.buffer).toString("base64");
+            let avatar = "data:" + req.file.mimetype + ";base64," + b64;
+    
     const userEmail = await User.findOne({ email });
 
     if (userEmail) {
@@ -229,7 +235,7 @@ router.put(
 router.put(
   "/update-avatar",
   isAuthenticated,
-  upload.single('photo'),
+  upload,
   catchAsyncErrors(async (req, res, next) => {
     try {
       let existsUser = await User.findById(req.user.id);
