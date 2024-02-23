@@ -8,17 +8,23 @@ import { Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrdersOfAdmin } from "../../redux/actions/order";
 import Loader from "../Layout/Loader";
+import AdminGraph from './AdminGraph';
+
 import { getAllSellers } from "../../redux/actions/sellers";
+
 
 const AdminDashboardMain = () => {
   const dispatch = useDispatch();
 
   const { adminOrders,adminOrderLoading } = useSelector((state) => state.order);
   const { sellers } = useSelector((state) => state.seller);
+ 
 
   useEffect(() => {
     dispatch(getAllOrdersOfAdmin());
     dispatch(getAllSellers());
+ 
+    
   }, []);
 
    const adminEarning = adminOrders && adminOrders.reduce((acc,item) => acc + item.totalPrice * .10, 0);
@@ -137,8 +143,8 @@ const AdminDashboardMain = () => {
         </div>
   
         <br />
-        <h3 className="text-[22px] font-Poppins pb-2">Latest Orders</h3>
-        <div className="w-full min-h-[45vh] bg-white rounded">
+        <h3 className="text-[22px] font-Poppins pb-2">Statistics </h3>
+        {/* <div className="w-full min-h-[45vh] bg-white rounded">
           <DataGrid
             rows={row}
             columns={columns}
@@ -146,7 +152,17 @@ const AdminDashboardMain = () => {
             disableSelectionOnClick
             autoHeight
           />
-        </div>
+        </div> */}
+      
+<div className="pt-20 flex flex-row flex-2 pb-72">
+ <AdminGraph type='User'/>
+ <AdminGraph type='Seller'/>
+ </div>
+
+
+  
+
+
       </div>
       )
     }
