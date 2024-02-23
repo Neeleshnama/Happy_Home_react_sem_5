@@ -144,15 +144,7 @@ const AdminDashboardMain = () => {
   
         <br />
         <h3 className="text-[22px] font-Poppins pb-2">Statistics </h3>
-        {/* <div className="w-full min-h-[45vh] bg-white rounded">
-          <DataGrid
-            rows={row}
-            columns={columns}
-            pageSize={4}
-            disableSelectionOnClick
-            autoHeight
-          />
-        </div> */}
+       
       
 <div className="pt-20 flex flex-row flex-2 pb-72">
  <AdminGraph type='User'/>
