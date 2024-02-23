@@ -1,7 +1,7 @@
 const express = require("express");
 //const User = require("../model/user");
-const {User,ResetToken} = require("../model/user");
-const bcrypt = require('bcrypt');
+const { User, ResetToken } = require("../model/user");
+const bcrypt = require("bcrypt");
 const router = express.Router();
 const cloudinary = require("cloudinary");
 const ErrorHandler = require("../utils/ErrorHandler");
@@ -10,21 +10,18 @@ const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
 const sendToken = require("../utils/jwtToken");
 const { isAuthenticated, isAdmin } = require("../middleware/auth");
-const multer= require('multer');
+const multer = require("multer");
 
-const storage=multer.memoryStorage();
-const upload = multer({ storage:storage }).single('avatar');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage }).single("avatar");
 
 // create user
-router.post("/create-user", upload,async (req, res, next) => {
+router.post("/create-user", upload, async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
-    console.log(req.file);
-    // const avatar = req.file.buffer.toString("base64");
-
     const b64 = Buffer.from(req.file.buffer).toString("base64");
-            let avatar = "data:" + req.file.mimetype + ";base64," + b64;
-    
+    let avatar = "data:" + req.file.mimetype + ";base64," + b64;
+
     const userEmail = await User.findOne({ email });
 
     if (userEmail) {
@@ -66,7 +63,6 @@ router.post("/create-user", upload,async (req, res, next) => {
     return next(new ErrorHandler(error.message, 400));
   }
 });
-
 
 // create activation token
 const createActivationToken = (user) => {
@@ -150,11 +146,10 @@ router.post(
 router.get(
   "/getuser",
   isAuthenticated,
-  
+
   catchAsyncErrors(async (req, res, next) => {
     try {
       const user = await User.findOne({ _id: req.user.id });
-      
 
       if (!user) {
         return next(new ErrorHandler("User doesn't exists", 400));
@@ -169,8 +164,6 @@ router.get(
     }
   })
 );
-
-// log ou
 
 // log out user
 router.get(
@@ -370,7 +363,7 @@ router.put(
 // forgot password request(new changes)
 
 // Route to handle forgot password request
-router.post('/forgot-password', async (req, res) => {
+router.post("/forgot-password", async (req, res) => {
   const { email } = req.body;
 
   try {
@@ -380,20 +373,6 @@ router.post('/forgot-password', async (req, res) => {
     // Save the token in the database
     await ResetToken.create({ email, token });
 
-    // const mailOptions = {
-    //   from: 'your-email@gmail.com',
-    //   to: email,
-    //   subject: 'Password Reset',
-    //   text: `Here is your password reset link: http://yourwebsite.com/reset-password/${token}`,
-    // };
-
-    // transporter.sendMail(mailOptions, (error, info) => {
-    //   if (error) {
-    //     return res.status(500).send(error.toString());
-    //   }
-    //   console.log('Email sent: ' + info.response);
-    //   res.status(200).send('Password reset email sent.');
-    // });
     await sendMail({
       email: email,
       subject: "set your password ",
@@ -410,7 +389,7 @@ router.post('/forgot-password', async (req, res) => {
 });
 
 // Route to render reset password form
-router.get('/reset-password/:token', async (req, res) => {
+router.get("/reset-password/:token", async (req, res) => {
   const { token } = req.params;
 
   try {
@@ -418,7 +397,7 @@ router.get('/reset-password/:token', async (req, res) => {
     const resetToken = await ResetToken.findOne({ token });
 
     if (!resetToken) {
-      return res.status(404).send('Invalid or expired reset token.');
+      return res.status(404).send("Invalid or expired reset token.");
     }
 
     // TODO: Add your logic here to check if the token is still valid based on your requirements
@@ -432,7 +411,7 @@ router.get('/reset-password/:token', async (req, res) => {
 });
 
 // Route to handle reset password form submission
-router.post('/reset-password/:token', async (req, res) => {
+router.post("/reset-password/:token", async (req, res) => {
   const { token } = req.params;
   const { newPassword } = req.body;
 
@@ -441,7 +420,7 @@ router.post('/reset-password/:token', async (req, res) => {
     const resetToken = await ResetToken.findOne({ token });
 
     if (!resetToken) {
-      return res.status(404).send('Invalid or expired reset token.');
+      return res.status(404).send("Invalid or expired reset token.");
     }
 
     // TODO: Add your logic here to check if the token is still valid based on your requirements
@@ -450,7 +429,7 @@ router.post('/reset-password/:token', async (req, res) => {
     const user = await User.findOne({ email: resetToken.email });
 
     if (!user) {
-      return res.status(404).send('User not found.');
+      return res.status(404).send("User not found.");
     }
 
     // TODO: Add your logic here to update the user's password
@@ -462,13 +441,12 @@ router.post('/reset-password/:token', async (req, res) => {
     // Delete the used reset token
     await ResetToken.deleteOne({ token });
 
-    res.status(200).send('Password successfully reset.');
+    res.status(200).send("Password successfully reset.");
   } catch (error) {
     console.error(error);
     res.status(500).send(error.toString());
   }
 });
-
 
 // find user infoormation with the userId
 router.get(
@@ -538,48 +516,42 @@ router.delete(
   })
 );
 
-// for admin login 
+// for admin login
 // Route for admin login
-router.post('/adminlogin',async (req, res) => {
+router.post("/adminlogin", async (req, res) => {
   const { email, password } = req.body;
 
   try {
     // Find the user by email
-   // const user = await User.findOne({ email });
+
     const user = await User.findOne({ email }).select("+password +role");
 
-      if (!user) {
-        return next(new ErrorHandler("User doesn't exists!", 400));
-      }
+    if (!user) {
+      return next(new ErrorHandler("User doesn't exists!", 400));
+    }
 
-      const passwordMatch= await user.comparePassword(password);
-
-
-    // if (!user) {
-    //   return res.status(401).json({ success: false, message: 'Invalid credentials' });
-    // }
+    const passwordMatch = await user.comparePassword(password);
 
     // Compare the provided password with the stored hashed password
-    //const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      return res.status(401).json({ success: false, message: 'Invalid credentials' });
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid credentials" });
     }
 
     // Check if the user has the 'admin' role
-    if ((user.role == 'user') ) {
-      return res.status(403).json({ success: false, message: 'Access denied. Not an admin.' });
+    if (user.role == "user") {
+      return res
+        .status(403)
+        .json({ success: false, message: "Access denied. Not an admin." });
     }
 
-    // Generate a JWT token for authentication
-    //const token = jwt.sign({ userId: user._id, role: user.role }, 'your-secret-key', { expiresIn: '1h' });
-
-    res.status(200).json({ success: true});
+    res.status(200).json({ success: true });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: 'Internal Server Error' });
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 });
-
 
 module.exports = router;

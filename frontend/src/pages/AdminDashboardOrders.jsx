@@ -79,7 +79,7 @@ const AdminDashboardOrders = () => {
               <DataGrid
                 rows={row}
                 columns={columns}
-                pageSize={4}
+                pageSize={10}
                 disableSelectionOnClick
                 autoHeight
               />

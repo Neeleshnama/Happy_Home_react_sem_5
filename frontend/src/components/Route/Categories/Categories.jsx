@@ -82,7 +82,7 @@ const Categories = () => {
       <h2 className=" h-16 " style={{ margin: "15px" , fontSize:"1.75rem"}} >{i.title}</h2>
     </div>
     <p className=" h-16 " style={{ marginTop: "-2px", marginBottom: "16px" }}>
-      
+    Explore {i.title} for all your household needs.
     </p>
     <button className="h-12"style={{ marginTop:"10px",padding: "10px 20px", backgroundColor: "rgb(30 58 138)", color: "white", borderRadius: "4px", border: "none", cursor: "pointer" }}
     onClick={() => handleSubmit(i)}>
