@@ -9,18 +9,22 @@ import { RxCross1 } from "react-icons/rx";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import Invoice from "../pages/Invoice";
 const UserOrderDetails = () => {
   const { orders } = useSelector((state) => state.order);
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
+
   const [comment, setComment] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
   const [rating, setRating] = useState(1);
 
   const { id } = useParams();
-
+  const toggleInvoiceModal = () => {
+    setOpen2(!open2);
+  };
   useEffect(() => {
     dispatch(getAllOrdersOfUser(user._id));
   }, [dispatch,user._id]);
@@ -99,6 +103,26 @@ const UserOrderDetails = () => {
               ₹{item.discountPrice} x {item.qty}
               </h5>
             </div>
+
+            <button className={`${styles.button} text-white`} onClick={toggleInvoiceModal}>
+        Download Invoice
+      </button>
+      
+      {/* Invoice modal */}
+      {open2 && (
+        <div className="w-full fixed top-0 left-0 h-screen bg-[#0005] z-50 flex items-center justify-center overflow-scroll">
+          <div className="w-[80%] h-[80%] bg-transparent shadow rounded-md p-3">
+            <div className="w-full flex justify-end p-3">
+              <RxCross1
+                size={30}
+                onClick={toggleInvoiceModal}
+                className="cursor-pointer"
+              />
+            </div>
+            <Invoice  order={data} />
+          </div>
+        </div>
+      )}
             {!item.isReviewed && data?.status === "Delivered" ?  <div
                 className={`${styles.button} text-[#fff]`}
                 onClick={() => setOpen(true) || setSelectedItem(item)}
