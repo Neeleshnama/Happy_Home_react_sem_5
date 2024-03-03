@@ -35,11 +35,17 @@ const Payment = () => {
       .create({
         purchase_units: [
           {
-            description: "Sunflower",
+            description: 'Book Again Thankyou',
             amount: {
               currency_code: "USD",
               value: orderData?.totalPrice,
+
+             
             },
+
+
+
+            
           },
         ],
         // not needed if a shipping address is actually needed

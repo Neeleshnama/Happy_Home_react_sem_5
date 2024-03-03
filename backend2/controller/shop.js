@@ -35,6 +35,9 @@ router.post("/create-shop", catchAsyncErrors(async (req, res, next) => {
       address: req.body.address,
       phoneNumber: req.body.phoneNumber,
       zipCode: req.body.zipCode,
+      country: req.body.country,
+      state: req.body.state,
+      city: req.body.city,
     };
 
     const activationToken = createActivationToken(seller);
@@ -62,7 +65,7 @@ router.post("/create-shop", catchAsyncErrors(async (req, res, next) => {
 // create activation token
 const createActivationToken = (seller) => {
   return jwt.sign(seller, process.env.ACTIVATION_SECRET, {
-    expiresIn: "15m",
+    expiresIn: "45m",
   });
 };
 
@@ -81,7 +84,7 @@ router.post(
       if (!newSeller) {
         return next(new ErrorHandler("Invalid token", 400));
       }
-      const { name, email, password, avatar, zipCode, address, phoneNumber } =
+      const { name, email, password, avatar,address, zipCode,phoneNumber,country,state,city } =
         newSeller;
 
       let seller = await Shop.findOne({ email });
@@ -98,6 +101,9 @@ router.post(
         zipCode,
         address,
         phoneNumber,
+        country,
+        state,
+        city,
       });
 
       sendShopToken(seller, 201, res);

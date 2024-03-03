@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "../../styles/styles";
-import { Country, State } from "country-state-city";
+import { Country, State,City } from "country-state-city";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -20,6 +20,9 @@ const Checkout = () => {
   const [couponCode, setCouponCode] = useState("");
   const [couponCodeData, setCouponCodeData] = useState(null);
   const [discountPrice, setDiscountPrice] = useState(null);
+  
+  const [cities, setcities] = useState("");
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -120,6 +123,7 @@ const Checkout = () => {
             setAddress2={setAddress2}
             zipCode={zipCode}
             setZipCode={setZipCode}
+            
           />
         </div>
         <div className="w-full 800px:w-[35%] 800px:mt-0 mt-8">
@@ -158,6 +162,7 @@ const ShippingInfo = ({
   setAddress2,
   zipCode,
   setZipCode,
+  
 }) => {
   return (
     <div className="w-full 800px:w-[95%] bg-white rounded-md p-5 pb-8">
@@ -227,14 +232,14 @@ const ShippingInfo = ({
             </select>
           </div>
           <div className="w-[50%]">
-            <label className="block pb-2">City</label>
+            <label className="block pb-2">State</label>
             <select
               className="w-[95%] border h-[40px] rounded-[5px]"
               value={city}
               onChange={(e) => setCity(e.target.value)}
             >
               <option className="block pb-2" value="">
-                Choose your City
+                Choose your State
               </option>
               {State &&
                 State.getStatesOfCountry(country).map((item) => (
@@ -244,6 +249,9 @@ const ShippingInfo = ({
                 ))}
             </select>
           </div>
+
+        
+
         </div>
 
         <div className="w-full flex pb-3">

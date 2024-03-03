@@ -60,8 +60,18 @@ const userSchema = new mongoose.Schema({
   type: Date,
   default: Date.now(),
  },
+ country:{
+  type: String,
+},
+state:{
+  type: String,
+},
+city:{
+  type: String,
+},
  resetPasswordToken: String,
  resetPasswordTime: Date,
+ 
 });
 
 // new 
