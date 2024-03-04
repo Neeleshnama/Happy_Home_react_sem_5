@@ -1,4 +1,5 @@
-import React, {useState, useEffect } from "react";
+
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { DataGrid } from "@material-ui/data-grid";
@@ -17,6 +18,9 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import Loader from "../Layout/Loader";
+import { server } from "../../server";
+import axios from "axios";
 
 ChartJS.register(
   CategoryScale,
@@ -31,13 +35,20 @@ ChartJS.register(
 
 const UserDetails = () => {
   const { id } = useParams();
-  const { orders } = useSelector((state) => state.order);
+  const [orders, setOrders] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllOrdersOfUser(id));
-    console.log("orders",orders);
+
+    fetchOrders();
   }, [id]);
+
+  const fetchOrders = async () => {
+    const { data } = await axios.get(
+      `${server}/order/get-all-orders/${id}`
+    );
+    setOrders(data.orders)
+  }
   const ordersPerMonth = orders ? orders.reduce((acc, order) => {
     const month = new Date(order.createdAt).getMonth();
     acc[month] = (acc[month] || 0) + 1;
@@ -45,7 +56,7 @@ const UserDetails = () => {
   }, {}) : {};
 
   const chartData = {
-    labels: Object.keys(ordersPerMonth).map(month => 
+    labels: Object.keys(ordersPerMonth).map(month =>
       new Date(0, month).toLocaleString('default', { month: 'long' })
     ),
     datasets: [
@@ -63,27 +74,27 @@ const UserDetails = () => {
       y: {
         beginAtZero: true,
         grid: {
-          display: false, 
+          display: false,
         },
       },
     },
     maintainAspectRatio: false,
   };
 
-  
-// Assuming you've fetched 'orders' already
-const statusCounts = orders?orders.reduce(
-  (acc, order) => {
-    acc.total++;
-    if (order.status === "Delivered") acc.delivered++;
-    if (order.status === "confirmed") acc.confirmed++;
-    return acc;
-  },
-  { total: 0, delivered: 0, confirmed: 0 }
-):{};
 
-// Calculate 'In Progress' as total - delivered - confirmed
-statusCounts.inProgress = statusCounts.total - statusCounts.delivered - statusCounts.confirmed;
+  // Assuming you've fetched 'orders' already
+  const statusCounts = orders ? orders.reduce(
+    (acc, order) => {
+      acc.total++;
+      if (order.status === "Delivered") acc.delivered++;
+      if (order.status === "confirmed") acc.confirmed++;
+      return acc;
+    },
+    { total: 0, delivered: 0, confirmed: 0 }
+  ) : {};
+
+  // Calculate 'In Progress' as total - delivered - confirmed
+  statusCounts.inProgress = statusCounts.total - statusCounts.delivered - statusCounts.confirmed;
 
 
   const columns = [
@@ -146,6 +157,7 @@ statusCounts.inProgress = statusCounts.total - statusCounts.delivered - statusCo
 
   return (
     <>
+
       <h2 className="px-[700px] pt-9">User Details</h2>
       <button className="pr-8 text-end">
         <Link to='/admin/dashboard'>Go back</Link>
@@ -155,21 +167,21 @@ statusCounts.inProgress = statusCounts.total - statusCounts.delivered - statusCo
       </div>
       <h3 className="pt-8 px-8">Statistics</h3>
       <div className="flex flex-row-3 justify-around mt-8 ">
-        
-  <div className="card p-8 px-16">
-    <h4>Delivered</h4>
-    <p>{statusCounts.delivered}</p>
-  </div>
-  <div className="card p-8 px-16">
-    <h4>Confirmed</h4>
-    <p>{statusCounts.confirmed}</p>
-  </div>
-  <div className="card p-8 px-16">
-    <h4>In Progress</h4> 
-    <p>{statusCounts.inProgress}</p>
-  </div>
-</div>
-   <h3 className="pt-8 px-8">Order Details</h3>
+
+        <div className="card p-8 px-16">
+          <h4>Delivered</h4>
+          <p>{statusCounts.delivered}</p>
+        </div>
+        <div className="card p-8 px-16">
+          <h4>Confirmed</h4>
+          <p>{statusCounts.confirmed}</p>
+        </div>
+        <div className="card p-8 px-16">
+          <h4>In Progress</h4>
+          <p>{statusCounts.inProgress}</p>
+        </div>
+      </div>
+      <h3 className="pt-8 px-8">Order Details</h3>
       <div className="pl-8 pt-8">
         <DataGrid
           rows={rows}
@@ -179,6 +191,10 @@ statusCounts.inProgress = statusCounts.total - statusCounts.delivered - statusCo
           disableSelectionOnClick
         />
       </div>
+
+
+
+
     </>
   );
 };
