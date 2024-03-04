@@ -1,4 +1,10 @@
 import React, { useState } from "react";
+
+
+
+
+
+import React, { useState,useEffect } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
@@ -16,7 +22,12 @@ const Signup = () => {
   const [avatar, setAvatar] = useState(null);
   const [emailValid, setEmailValid] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
-
+  const [country, setCountry] =useState('');
+  const [state, setState] = useState('');
+ const [city, setCity] = useState('');
+const [ipAddress, setIpAddress] = useState('');
+const [locationData, setLocationData] = useState(null);
+const [flags,setflags]=useState(0);
   const validateEmail = (email) => {
     // Regular expression for email validation
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -30,16 +41,78 @@ const Signup = () => {
     return passwordRegex.test(password);
     
   };
+ 
+// fetching user location
+const getPublicIpAddress = async () => {
+  try {
+    const response = await axios.get('https://api.ipify.org?format=json');
+    const ipAddress = response.data.ip;
+    console.log('Public IP address:', ipAddress);
+    setIpAddress(ipAddress);
+
+    const response2 = await axios.get('https://ip-geolocation-find-ip-location-and-ip-info.p.rapidapi.com/backend/ipinfo/', {
+      params: {
+        ip: ipAddress
+      },
+      headers: {
+        'X-RapidAPI-Key': '3a1b6d23femsh2f4e722ac5cb9e1p11579fjsn02d2d25e2fde',
+        'X-RapidAPI-Host': 'ip-geolocation-find-ip-location-and-ip-info.p.rapidapi.com'
+      }
+    });
+    console.log(response2.data);
+    setLocationData(response2.data);
+    console.log(locationData && locationData.region);
+    setCity( locationData && locationData.city);
+    setCountry( locationData && locationData.country_name);
+    setState( locationData && locationData.region);
+    //toast.success('your location accessed ');
+    return ipAddress;
+  } catch (error) {
+    setflags(1);
+    toast.error(`please try after (1-2min)  our servers are not getting your location ${error.message}`);
+    console.error('Error fetching public IP address:', error.message);
+    return null;
+  }
+};
+
+  useEffect(() => {
+    getPublicIpAddress();
+   
+    //fetchUserLocation();
+  }, []);
+  console.log(ipAddress);
+
+  useEffect(() => {
+setTimeout(() => {
+  try{
+  
+   if(!locationData && !locationData.region || !locationData.country_name || !locationData.city) {
+    toast.error('please try after (1-2min)  our servers are not getting your location');
+   
+   } 
+   
+  
+   else{
+    toast.success('your location accessed ');
+    console.log(locationData && locationData.city);
+   } }
+   catch(error){
+    console.log(error);
+   // toast.success('please wait');
+   
+
+   }
+}, 5000);},[locationData]);
 
  
-
-  const handleFileInputChange = (e) => {
+   const handleFileInputChange = (e) => {
     setAvatar(e.target.files[0]);
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
+    // console.log(country);
+    // console.log(state);
     if (!emailValid || !passwordValid) {
       toast.error("Please enter valid email and password.");
       return;
@@ -50,6 +123,11 @@ const Signup = () => {
     formData.append("email", email);
     formData.append("password", password);
     formData.append("avatar", avatar);
+    formData.append("country", locationData && locationData.country_name); // Add country to form data
+    formData.append("state", locationData && locationData.region); 
+    formData.append("city", locationData && locationData.city); 
+   // console.log(formData);
+  console.log("image",formData.get('avatar'));
   axios
   .post(`${server}/user/create-user`, formData, {
     headers: {
@@ -68,7 +146,9 @@ const Signup = () => {
   });
   };
 
-  console.log(avatar);
+ // console.log(avatar);
+  console.log(locationData && locationData.city);
+  //console.log(state);
 
   return (
     <div className="min-h-screen bg-blue-200 flex justify-center py-12 sm:px-6 lg:px-8">

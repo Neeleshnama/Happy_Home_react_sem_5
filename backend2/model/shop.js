@@ -76,7 +76,19 @@ const shopSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  verified:Boolean,
+  verified: {
+    type: Boolean,
+    default: false,
+  },
+  country:{
+    type: String,
+  },
+  state:{
+    type: String,
+  },
+  city:{
+    type: String,
+  },
   resetPasswordToken: String,
   resetPasswordTime: Date,
 });

@@ -169,6 +169,8 @@ const App = () => {
           }
         />
         <Route path="/shop/preview/:id" element={<ShopPreviewPage />} />
+        <Route path="/shop/Revenue/:id" element={<ShopRevenuePage />} />
+
         {/* shop Routes */}
         <Route path="/shop-create" element={<ShopCreatePage />} />
         <Route path="/shop-login" element={<ShopLoginPage />} />

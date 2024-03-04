@@ -18,7 +18,7 @@ const upload = multer({ storage: storage }).single("avatar");
 // create user
 router.post("/create-user", upload, async (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password,country,state,city } = req.body;
     const b64 = Buffer.from(req.file.buffer).toString("base64");
     let avatar = "data:" + req.file.mimetype + ";base64," + b64;
 
@@ -40,6 +40,9 @@ router.post("/create-user", upload, async (req, res, next) => {
         public_id: myCloud.public_id,
         url: myCloud.secure_url,
       },
+      country: country,
+      state: state,
+      city: city,
     };
 
     const activationToken = createActivationToken(user);
@@ -86,7 +89,7 @@ router.post(
       if (!newUser) {
         return next(new ErrorHandler("Invalid token", 400));
       }
-      const { name, email, password, avatar } = newUser;
+      const { name, email, password, avatar,country,state,city } = newUser;
 
       let user = await User.findOne({ email });
 
@@ -98,6 +101,9 @@ router.post(
         email,
         avatar,
         password,
+        country,
+        state,
+        city,
       });
 
       sendToken(user, 201, res);

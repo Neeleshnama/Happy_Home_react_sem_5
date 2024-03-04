@@ -7,6 +7,7 @@ const Shop = require("../model/shop");
 const cloudinary = require("cloudinary");
 const ErrorHandler = require("../utils/ErrorHandler");
 const Order = require("../model/Order");
+const {User} = require("../model/user");
 
 // create product
 router.post(
@@ -103,7 +104,7 @@ router.get(
   })
 );
 
-// get all products
+// // get all products
 router.get(
   "/get-all-products",
   catchAsyncErrors(async (req, res, next) => {
@@ -119,6 +120,35 @@ router.get(
     }
   })
 );
+
+// get the specific products based on users location
+// router.get(
+//   "/get-all-products",isAuthenticated,
+//   catchAsyncErrors(async (req, res, next) => {
+//     try {
+//       const user = await User.findById(req.user.id);
+//       const products = await Product.find().sort({ createdAt: -1 });
+//     console.log(products);
+//       // 3. Filter products based on the location of the seller
+//       const filteredProducts = products.filter(product => {
+//         // Check if the product has a shop object and it contains state and city information
+//         if (product.shop && product.shop.state && product.shop.city && product.shop.country) {
+//           // Compare the state and city of the shop with the user's location
+//           return product.shop.state === user.state && product.shop.city === user.city && product.shop.country === user.country;
+//         }
+//         return product; // If shop information is missing, exclude the product
+//       });
+
+//       // 4. Return the filtered products in the response
+//       res.status(201).json({
+//         success: true,
+//         products: filteredProducts,
+//       });
+//     } catch (error) {
+//       return next(new ErrorHandler(error, 400));
+//     }
+//   })
+// );
 
 // review for a product
 router.put(

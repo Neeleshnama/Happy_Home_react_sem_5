@@ -1,0 +1,15 @@
+@media print {
+    /* Hide unnecessary elements */
+    .no-print {
+      display: none !important;
+    }
+  
+    /* Adjust font sizes and other styles for better print readability */
+    /* Add additional print-specific styles as needed */
+  
+    /* Example: Adjust font size for better readability */
+    .invoice-print {
+      font-size: 12px;
+    }
+  }
+  
