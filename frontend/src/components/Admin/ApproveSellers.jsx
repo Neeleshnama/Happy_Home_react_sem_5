@@ -240,24 +240,24 @@ const ApproveSellers = () => {
       flex: 0.8,
     },
     {
-        field: "  ",
-        flex: 1,
-        minWidth: 150,
-        headerName: "Preview Shop",
-        type: "number",
-        sortable: false,
-        renderCell: (params) => {
-          return (
-            <>
+      field: "  ",
+      flex: 1,
+      minWidth: 150,
+      headerName: "Preview Shop",
+      type: "number",
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <>
             <Link to={`/shop/preview/${params.id}`}>
-            <Button>
+              <Button>
                 <AiOutlineEye size={20} />
               </Button>
             </Link>
-            </>
-          );
-        },
+          </>
+        );
       },
+    },
     {
       field: "approve",
       flex: 1,
@@ -268,8 +268,8 @@ const ApproveSellers = () => {
       renderCell: (params) => {
         return (
           <>
-            <Button 
-              style={{backgroundColor: params.row.status === true ? 'green' : 'white'}} 
+            <Button
+              style={{ backgroundColor: params.row.status === true ? 'green' : 'white' }}
               onClick={() => handleAction(params.id, 'approve')}>
               Approve
             </Button>
@@ -287,8 +287,8 @@ const ApproveSellers = () => {
       renderCell: (params) => {
         return (
           <>
-            <Button 
-              style={{backgroundColor: params.row.status === false ? 'red' : 'white'}} 
+            <Button
+              style={{ backgroundColor: params.row.status === false ? 'red' : 'white' }}
               onClick={() => handleAction(params.id, 'reject')}>
               Reject
             </Button>
@@ -300,7 +300,7 @@ const ApproveSellers = () => {
 
   const row = [];
   sellers &&
-  sellers.forEach((item) => {
+    sellers.forEach((item) => {
       row.push({
         id: item._id,
         name: item?.name,
@@ -310,38 +310,35 @@ const ApproveSellers = () => {
         status: item.verified // assuming 'status' is a property in your seller object
       });
     });
-     // Filter approved and rejected sellers
-  const approvedSellers = row.filter((seller) => seller.status === true);
-  const rejectedSellers = row.filter((seller) => seller.status === false);
-  const notApprovedSellers = row.filter((seller) => !seller.status);
 
-    const filteredSellers = row.filter((seller) => {
-      if (filterOption === "approved") {
-        return seller.status === true;
-      } else if (filterOption === "rejected") {
-        return seller.status === false;
-      } else {
-        return true;
-      }
-    });
 
- 
+  const filteredSellers = row.filter((seller) => {
+    if (filterOption === "approved") {
+      return seller.status === true;
+    } else if (filterOption === "rejected") {
+      return seller.status === false;
+    } else {
+      return true;
+    }
+  });
+
+
 
   return (
     <div className="w-full flex justify-center pt-5 bg-blue-100">
       <div className="w-[97%]">
-     
+
         {/* Add filter options */}
         <select
-  value={filterOption}
-  onChange={(e) => setFilterOption(e.target.value)}
-  className=" w-64 mb-3 px-2 py-1 border rounded-md"
-  style={{ backgroundColor: "#f3f4f6", color: "#4b5563" }}
->
-  <option value="all">All Sellers</option>
-  <option value="approved">Approved Sellers</option>
-  <option value="rejected">Rejected Sellers</option>
-</select>
+          value={filterOption}
+          onChange={(e) => setFilterOption(e.target.value)}
+          className=" w-64 mb-3 px-2 py-1 border rounded-md"
+          style={{ backgroundColor: "#f3f4f6", color: "#4b5563" }}
+        >
+          <option value="all">All Sellers</option>
+          <option value="approved">Approved Sellers</option>
+          <option value="rejected">Rejected Sellers</option>
+        </select>
 
         <div className="w-full min-h-[45vh] rounded">
           <DataGrid
@@ -352,7 +349,7 @@ const ApproveSellers = () => {
             autoHeight
           />
         </div>
-     
+
         {open && (
           <div className="w-full fixed top-0 left-0 z-[999] bg-[#00000039] flex items-center justify-center h-screen">
             <div className="w-[95%] 800px:w-[40%] min-h-[20vh]  rounded shadow p-5">

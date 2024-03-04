@@ -17,11 +17,6 @@ app.use(cors({
 
 app.use(express.json());
 app.use(cookieParser());
-app.use("/test", (req, res) => {
-  res.send("Hello world!");
-});
-
-
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 // config
@@ -38,7 +33,6 @@ const time=Date()
 const logDirectory = path.join(__dirname, 'logs');
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 const accessLogStream = rfs.createStream((time, index) => {
-  //if (!time) return 'access.log'; // default file name
   const currentDate = moment().format('YYYY-MM-DD');
   return `${currentDate}-access.log`; // file name with date
 }, {

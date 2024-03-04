@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { getAllUsers } from "../../redux/actions/user";
 import { DataGrid } from "@material-ui/data-grid";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -13,6 +14,7 @@ import { toast } from "react-toastify";
 
 const AllUsers = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { users } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const [userId, setUserId] = useState("");
@@ -23,17 +25,16 @@ const AllUsers = () => {
 
   const handleDelete = async (id) => {
     await axios
-    .delete(`${server}/user/delete-user/${id}`, { withCredentials: true })
-    .then((res) => {
-      toast.success(res.data.message);
-    });
+      .delete(`${server}/user/delete-user/${id}`, { withCredentials: true })
+      .then((res) => {
+        toast.success(res.data.message);
+      });
 
-  dispatch(getAllUsers());
+    dispatch(getAllUsers());
   };
 
   const columns = [
     { field: "id", headerName: "User ID", minWidth: 150, flex: 0.7 },
-
     {
       field: "name",
       headerName: "name",
@@ -54,7 +55,6 @@ const AllUsers = () => {
       minWidth: 130,
       flex: 0.7,
     },
-
     {
       field: "joinedAt",
       headerName: "joinedAt",
@@ -62,7 +62,6 @@ const AllUsers = () => {
       minWidth: 130,
       flex: 0.8,
     },
-
     {
       field: " ",
       flex: 1,
@@ -73,15 +72,14 @@ const AllUsers = () => {
       renderCell: (params) => {
         return (
           <>
-            {/* <Button onClick={() => setUserId(params.id) || setOpen(true)}>
+            <Button
+              onClick={() => {
+                setUserId(params.id);
+                setOpen(true);
+              }}
+            >
               <AiOutlineDelete size={20} />
-            </Button> */}
-            <Button onClick={() => {
-  setUserId(params.id);
-  setOpen(true);
-}}>
-  <AiOutlineDelete size={20} />
-</Button>
+            </Button>
           </>
         );
       },
@@ -100,6 +98,11 @@ const AllUsers = () => {
       });
     });
 
+  const handleUserIdClick = (id) => {
+    navigate(`/user/history/${id}`);
+
+  };
+
   return (
     <div className="w-full flex justify-center pt-5 bg-blue-100">
       <div className="w-[97%]">
@@ -111,6 +114,11 @@ const AllUsers = () => {
             pageSize={10}
             disableSelectionOnClick
             autoHeight
+            onCellClick={(params) => {
+              if (params.field === "id") {
+                handleUserIdClick(params.value);
+              }
+            }}
           />
         </div>
         {open && (
@@ -131,7 +139,7 @@ const AllUsers = () => {
                 </div>
                 <div
                   className={`${styles.button} text-white text-[18px] !h-[42px] ml-4`}
-                  onClick={() =>  setOpen(false) || handleDelete(userId)}
+                  onClick={() => setOpen(false) || handleDelete(userId)}
                 >
                   confirm
                 </div>

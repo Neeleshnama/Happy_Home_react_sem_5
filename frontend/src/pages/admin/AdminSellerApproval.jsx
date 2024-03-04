@@ -1,8 +1,8 @@
 import React from 'react'
-import AdminHeader from '../components/Layout/AdminHeader'
-import AdminSideBar from '../components/Admin/Layout/AdminSideBar'
-import AllSellers from "../components/Admin/AllSellers";
-import ApproveSellers from '../components/Admin/ApproveSellers';
+import AdminHeader from '../../components/Layout/AdminHeader'
+import AdminSideBar from '../../components/Admin/Layout/AdminSideBar'
+import AllSellers from "../../components/Admin/AllSellers";
+import ApproveSellers from '../../components/Admin/ApproveSellers';
 
 const AdminSellerApproval = () => {
   return (

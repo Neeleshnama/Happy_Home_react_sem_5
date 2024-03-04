@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Admin from "../components/Admin Login/Admin";
+import Admin from "../../components/Admin Login/Admin";
 const AdminPage = () => {
   return (
     <div>

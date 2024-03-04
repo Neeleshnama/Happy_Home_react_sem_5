@@ -12,7 +12,7 @@ import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 
 const AdminSideBar = ({ active }) => {
   return (
-    <div className="w-full bg-white shadow-sm overflow-y-scroll sticky top-0 left-0 z-10">
+    <div className="w-full h-auto pb-28 pt-6 bg-white shadow-sm ">
       {/* single item */}
       <div className="w-full flex items-center p-4">
         <Link to="/admin/dashboard" className="w-full flex items-center">

@@ -13,11 +13,12 @@ import {
   CheckoutPage,
   PaymentPage,
   OrderSuccessPage,
+  UserRecordPage,
   ProductDetailsPage,
   ProfilePage,
   ShopCreatePage,
   SellerActivationPage,
-  ShopLoginPage,
+ 
   OrderDetailsPage,
   TrackOrderPage,
   UserInbox,
@@ -26,6 +27,7 @@ import {
 } from "./routes/Routes.js";
 import {
   ShopDashboardPage,
+  ShopLoginPage,
   ShopCreateProduct,
   ShopAllProducts,
   ShopCreateEvents,
@@ -63,7 +65,7 @@ import axios from "axios";
 import { server } from "./server";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import AdminPage from "./pages/AdminLoginPage.jsx";
+import AdminPage from "./pages/admin/AdminLoginPage.jsx";
 
 const App = () => {
   const [stripeApikey, setStripeApiKey] = useState("");
@@ -147,6 +149,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <OrderDetailsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/user/history/:id"
+          element={
+            <ProtectedRoute>
+              <UserRecordPage />
             </ProtectedRoute>
           }
         />
