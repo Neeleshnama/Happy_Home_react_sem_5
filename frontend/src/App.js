@@ -66,6 +66,7 @@ import { server } from "./server";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import AdminPage from "./pages/admin/AdminLoginPage.jsx";
+import ShopRevenuePage from "./pages/ShopRevenuePage.jsx";
 
 const App = () => {
   const [stripeApikey, setStripeApiKey] = useState("");
