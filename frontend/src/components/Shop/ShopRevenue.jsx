@@ -34,8 +34,8 @@ const ShopRevenue = () => {
       flex: 0.7,
       cellClassName: (params) => {
         return params.getValue(params.id, "status") === "Delivered"
-          ? "greenColor"
-          : "redColor";
+          ? "greencolor"
+          : "redcolor";
       },
     },
     {
@@ -198,14 +198,14 @@ useEffect(() => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="w-full mx-8 pt-1 mt-10 bg-blue-100">
-
+        <div className="w-full mx-8 pt-1 mt-10 bg-white-100">
+<h2>Seller Revenue Details</h2>
 <Card className="mb-4">
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 Total Order Cost
               </Typography>
-              <Typography variant="h4">
+              <Typography variant="h4" style={{color:'red'}}>
                 ₹ {totalOrderCost}
               </Typography>
             </CardContent>
@@ -215,7 +215,7 @@ useEffect(() => {
               <Typography variant="h6" gutterBottom>
                 Net Sales
               </Typography>
-              <Typography variant="h4">
+              <Typography variant="h4" style={{color:'green'}}>
                 ₹ {netSales}
               </Typography>
             </CardContent>
@@ -259,7 +259,7 @@ useEffect(() => {
         {Object.keys(ordersByCategory).map((category) => (
           <tr key={category} style={{ borderBottom: "1px solid #ccc" }}>
             <td style={{ padding: "8px", textAlign: "left" }}>{category}</td>
-            <td style={{ padding: "8px", textAlign: "left" }}>
+            <td style={{ padding: "8px", textAlign: "left" ,color:'red'}}>
               ₹ {ordersByCategory[category]}
             </td>
           </tr>

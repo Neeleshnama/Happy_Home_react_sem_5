@@ -244,7 +244,7 @@ const ShopCreate = () => {
               </option>
               {Country &&
                 Country.getAllCountries().map((item) => (
-                  <option key={item.isoCode} value={item.isoCode}>
+                  <option key={item.isoCode} value={item.isoCode}  >
                     {item.name}
                   </option>
                 ))}
@@ -301,7 +301,7 @@ const ShopCreate = () => {
                 ))} */}
               {City &&
                 City.getCitiesOfState(country, state).map((item) => (
-                  <option key={item.isoCode} value={item.isoCode}>
+                  <option key={item.isoCode} value={item.name}>
                     {item.name}
                   </option>))}
             </select>
