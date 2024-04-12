@@ -71,6 +71,7 @@ const getPublicIpAddress = async () => {
   }
 };
 
+
   useEffect(() => {
     getPublicIpAddress();
    
