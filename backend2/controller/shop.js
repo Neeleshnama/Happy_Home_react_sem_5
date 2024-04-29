@@ -9,26 +9,29 @@ const cloudinary = require("cloudinary");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
 const sendShopToken = require("../utils/shopToken");
-const { createClient } = require("redis");
+const dotenv = require("dotenv");
 
 router.use(express.urlencoded({ extended: true }));
 
-const client = createClient();
+
+const { Redis }=require('@upstash/redis')
+
+const client = new Redis({
+  url: process.env.REDIS_URL,
+  token: process.env.REDIS_TOKEN,
+})
 
 const DEFAULT_EXPIRATION = 3600;
 async function getOrSetCache(key, cb) {
-  await client.connect();
-  console.log("Fetching data from MongoDB");
+
   const data = await client.get(key);
   if (data) {
     console.log("Cache hit");
-    client.quit();
-    return JSON.parse(data);
+    return data;
   }
   console.log("Cache miss");
   const freshData = await cb();
-  client.setEx(key, DEFAULT_EXPIRATION, JSON.stringify(freshData));
-  client.quit();
+  client.set(key, freshData);
   return freshData;
 }
 
