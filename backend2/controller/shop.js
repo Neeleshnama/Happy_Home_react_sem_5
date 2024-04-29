@@ -21,7 +21,6 @@ const client = new Redis({
   token: process.env.REDIS_TOKEN,
 })
 
-const DEFAULT_EXPIRATION = 3600;
 async function getOrSetCache(key, cb) {
 
   const data = await client.get(key);
