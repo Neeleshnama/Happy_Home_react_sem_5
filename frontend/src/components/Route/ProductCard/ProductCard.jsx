@@ -88,7 +88,7 @@ const ProductCard = ({ data,isEvent }) => {
   return (
     <div>
      {/* //write for new product card */}
-     <MDBContainer fluid className="my-5 h-[22rem] w-auto corners">
+     <MDBContainer fluid className="my-16 h-[22rem] w-auto corners">
     <MDBRow>
       <MDBCol md="12" lg="4" className="mb-4 mb-lg-0 h-80">
         <MDBCard>

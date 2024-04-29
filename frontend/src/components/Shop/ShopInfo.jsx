@@ -48,8 +48,8 @@ const ShopInfo = ({ isOwner }) => {
     isLoading  ? (
       <Loader />
     ) : (
-      <div>
-      <div className="w-full py-5">
+      <div className="bg-[#1e3a8a] pb-64 h-[150vh]">
+      <div className="w-full pt-5  bg-white ">
         <div className="w-full flex item-center justify-center">
           <img
             src={`${data.avatar?.url}`}
@@ -62,25 +62,26 @@ const ShopInfo = ({ isOwner }) => {
           {data.description}
         </p>
       </div>
+      <div className="bg-[#1e3a8a]">
       <div className="p-3">
-        <h5 className="font-[600]">Address</h5>
-        <h4 className="text-[#000000a6]">{data.address}</h4>
+        <h5 className="font-[600] text-gray-400">Address</h5>
+        <h4 className="text-white">{data.address}</h4>
       </div>
       <div className="p-3">
-        <h5 className="font-[600]">Phone Number</h5>
-        <h4 className="text-[#000000a6]">{data.phoneNumber}</h4>
+        <h5 className="font-[600] text-gray-400">Phone Number</h5>
+        <h4 className="text-white">{data.phoneNumber}</h4>
       </div>
       <div className="p-3">
-        <h5 className="font-[600]">Total Products</h5>
-        <h4 className="text-[#000000a6]">{products && products.length}</h4>
+        <h5 className="font-[600] text-gray-400">Total Products</h5>
+        <h4 className="text-white">{products && products.length}</h4>
       </div>
       <div className="p-3">
-        <h5 className="font-[600]">Shop Ratings</h5>
-        <h4 className="text-[#000000b0]">{averageRating}/5</h4>
+        <h5 className="font-[600] text-gray-400">Shop Ratings</h5>
+        <h4 className="text-white">{averageRating}/5</h4>
       </div>
       <div className="p-3">
-        <h5 className="font-[600]">Joined On</h5>
-        <h4 className="text-[#000000b0]">{data?.createdAt?.slice(0, 10)}</h4>
+        <h5 className="font-[600] text-gray-400">Joined On</h5>
+        <h4 className="text-white">{data?.createdAt?.slice(0, 10)}</h4>
       </div>
       {isOwner && (
         <div className="py-3 px-4">
@@ -96,6 +97,7 @@ const ShopInfo = ({ isOwner }) => {
           </div>
         </div>
       )}
+    </div>
     </div>
     )
    }
