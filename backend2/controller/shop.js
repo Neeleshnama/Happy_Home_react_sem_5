@@ -9,6 +9,57 @@ const cloudinary = require("cloudinary");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
 const sendShopToken = require("../utils/shopToken");
+const { createClient } = require("redis");
+
+router.use(express.urlencoded({ extended: true }));
+
+const client = createClient();
+
+const DEFAULT_EXPIRATION = 3600;
+async function getOrSetCache(key, cb) {
+  await client.connect();
+  console.log("Fetching data from MongoDB");
+  const data = await client.get(key);
+  if (data) {
+    console.log("Cache hit");
+    client.quit();
+    return JSON.parse(data);
+  }
+  console.log("Cache miss");
+  const freshData = await cb();
+  client.setEx(key, DEFAULT_EXPIRATION, JSON.stringify(freshData));
+  client.quit();
+  return freshData;
+}
+
+
+router.get(
+  "/admin-all-sellers",
+  isAuthenticated,
+  isAdmin("Admin"),
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+     
+      const cachedData = await getOrSetCache("allsellers", async () => {
+        return await Shop.find().sort({ createdAt: -1 });
+      });
+      res.status(200).json({
+        success: true,
+        sellers: cachedData,
+        message: 'Data retrieved from Redis cache',
+      });
+      
+      }
+    catch (error) {
+      console.error('Route handler error:', error);
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
+
+
+
+
 
 // create shop
 router.post("/create-shop", catchAsyncErrors(async (req, res, next) => {
@@ -202,17 +253,40 @@ router.get(
 // get shop info
 router.get(
   "/get-shop-info/:id",
-  catchAsyncErrors(async (req, res, next) => {
+  async (req, res, next) => {
     try {
-      const shop = await Shop.findById(req.params.id);
-      res.status(201).json({
-        success: true,
-        shop,
+      const cachedShops = await getOrSetCache("allsellers", async () => {
+        // Retrieve all shops from the database if not found in cache
+        const allShops = await Shop.find().lean(); // Use .lean() to get plain JS objects
+        return allShops;
       });
+
+      // Check if the requested shop ID exists in the cached data
+      const shop = cachedShops.find((shop) => shop._id.toString() === req.params.id);
+      if (!shop) {
+        // If shop with the requested ID is not found in the cache, fetch from the database
+        const freshShop = await Shop.findById(req.params.id);
+        if (!freshShop) {
+          throw new ErrorHandler(`Shop not found with ID: ${req.params.id}`, 404);
+        }
+        res.status(201).json({
+          success: true,
+          shop: freshShop,
+          message: "Data retrieved from MongoDB",
+        });
+      } else {
+        // Shop found in the cached data
+        res.status(200).json({
+          success: true,
+          shop,
+          message: "Data retrieved from Redis cache",
+        });
+      }
     } catch (error) {
-      return next(new ErrorHandler(error.message, 500));
+      console.error("Route handler error:", error);
+      return next(new ErrorHandler(error.message, error.statusCode || 500));
     }
-  })
+  }
 );
 
 // update shop profile picture
@@ -283,24 +357,10 @@ router.put(
 );
 
 // all sellers --- for admin
-router.get(
-  "/admin-all-sellers",
-  isAuthenticated,
-  isAdmin("Admin"),
-  catchAsyncErrors(async (req, res, next) => {
-    try {
-      const sellers = await Shop.find().sort({
-        createdAt: -1,
-      });
-      res.status(201).json({
-        success: true,
-        sellers,
-      });
-    } catch (error) {
-      return next(new ErrorHandler(error.message, 500));
-    }
-  })
-);
+
+
+
+
 
 // -- admin seller approval
 
