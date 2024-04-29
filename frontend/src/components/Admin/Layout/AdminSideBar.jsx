@@ -12,9 +12,9 @@ import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 
 const AdminSideBar = ({ active }) => {
   return (
-    <div className="w-full h-auto pb-28 pt-6 bg-white shadow-sm ">
+    <div className="w-full h-auto pb-24 pt-6 bg-white shadow-sm " >
       {/* single item */}
-      <div className="w-full flex items-center p-4">
+      <div className="w-full flex items-center p-4" >
         <Link to="/admin/dashboard" className="w-full flex items-center">
           <RxDashboard
             size={30}
