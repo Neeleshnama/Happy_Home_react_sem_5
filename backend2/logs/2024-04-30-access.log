@@ -545,3 +545,5 @@ a request to /get-all-orders/65e5c734555b7f1deb868bcf arrived on 2024-04-30 00:5
 a request to /admin-all-users arrived on 2024-04-30 00:57:55 and this is method GET server took 601.643 to reply this request with a status code 201
 a request to /admin-all-sellers arrived on 2024-04-30 00:58:13 and this is method GET server took 587.992 to reply this request with a status code 304
 a request to /admin-all-orders arrived on 2024-04-30 00:58:17 and this is method GET server took 1201.279 to reply this request with a status code 201
+a request to /api/v2/shop/get-shop-info/65e412e3c57c671a3698991b arrived on 2024-04-30 02:33:50 and this is method GET server took 425.011 to reply this request with a status code 500
+a request to /get-shop-info/65e412e3c57c671a3698991b arrived on 2024-04-30 10:51:35 and this is method GET server took 1829.503 to reply this request with a status code 200

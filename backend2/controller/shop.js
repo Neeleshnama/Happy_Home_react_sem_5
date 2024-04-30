@@ -9,12 +9,11 @@ const cloudinary = require("cloudinary");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
 const sendShopToken = require("../utils/shopToken");
-const dotenv = require("dotenv");
+const { Redis }=require('@upstash/redis')
 
 router.use(express.urlencoded({ extended: true }));
 
 
-const { Redis }=require('@upstash/redis')
 
 const client = new Redis({
   url: process.env.REDIS_URL,
@@ -33,8 +32,6 @@ async function getOrSetCache(key, cb) {
   client.set(key, freshData);
   return freshData;
 }
-
-
 router.get(
   "/admin-all-sellers",
   isAuthenticated,
@@ -258,8 +255,8 @@ router.get(
   async (req, res, next) => {
     try {
       const cachedShops = await getOrSetCache("allsellers", async () => {
-        // Retrieve all shops from the database if not found in cache
-        const allShops = await Shop.find().lean(); // Use .lean() to get plain JS objects
+        
+        const allShops = await Shop.find().lean(); 
         return allShops;
       });
 

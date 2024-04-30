@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  backend:
+   mongo_db:
+    container_name: db_container
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_db:/data/db
+
+    # Node API service
+    api:
+      build: .
+      ports:
+        - 8000:8000
+      volumes:
+        - .:/usr/src/app
+      env_file:
+        - config/.env
+      depends_on:
+        - mongo_db
+
+  volumes:
+    mongo_db: {}
