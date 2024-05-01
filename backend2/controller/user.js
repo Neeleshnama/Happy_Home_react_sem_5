@@ -1,7 +1,7 @@
 const express = require("express");
 //const User = require("../model/user");
 const { User, ResetToken } = require("../model/user");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const router = express.Router();
 const cloudinary = require("cloudinary");
 const ErrorHandler = require("../utils/ErrorHandler");
