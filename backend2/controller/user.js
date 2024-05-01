@@ -11,7 +11,8 @@ const sendMail = require("../utils/sendMail");
 const sendToken = require("../utils/jwtToken");
 const { isAuthenticated, isAdmin } = require("../middleware/auth");
 const multer = require("multer");
-
+const redis = require("redis");
+const client = redis.createClient();
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage }).single("avatar");
 
@@ -66,6 +67,73 @@ router.post("/create-user", upload, async (req, res, next) => {
     return next(new ErrorHandler(error.message, 400));
   }
 });
+
+
+
+//---------------------------optimized signup
+// router.post("/create-user", upload, async (req, res, next) => {
+//   try {
+//     const { name, email, password, country, state, city } = req.body;
+//     const b64 = Buffer.from(req.file.buffer).toString("base64");
+//     let avatar = "data:" + req.file.mimetype + ";base64," + b64;
+
+//     // Check if user already exists in Redis cache
+//     client.get(email, async (err, userData) => {
+//       if (err) throw err;
+
+//       if (userData) {
+//         return next(new ErrorHandler("User already exists", 400));
+//       }
+
+//       // If user doesn't exist in cache, query the database
+//       const userEmail = await User.findOne({ email });
+
+//       if (userEmail) {
+//         return next(new ErrorHandler("User already exists", 400));
+//       }
+
+//       // Upload avatar to cloudinary
+//       const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+//         folder: "avatars",
+//       });
+
+//       const user = {
+//         name: name,
+//         email: email,
+//         password: password,
+//         avatar: {
+//           public_id: myCloud.public_id,
+//           url: myCloud.secure_url,
+//         },
+//         country: country,
+//         state: state,
+//         city: city,
+//       };
+
+//       // Create activation token
+//       const activationToken = createActivationToken(user);
+
+//       const activationUrl = `http://localhost:3000/activation/${activationToken}`;
+
+//       // Send activation email
+//       await sendMail({
+//         email: user.email,
+//         subject: "Activate your account",
+//         message: `Hello ${user.name}, please click on the link to activate your account: ${activationUrl}`,
+//       });
+
+//       // Cache the newly created user details in Redis
+//       client.setex(email, 3600, JSON.stringify(user));
+
+//       res.status(201).json({
+//         success: true,
+//         message: `Please check your email: ${user.email} to activate your account!`,
+//       });
+//     });
+//   } catch (error) {
+//     return next(new ErrorHandler(error.message, 400));
+//   }
+// });
 
 // create activation token
 const createActivationToken = (user) => {
@@ -144,6 +212,43 @@ router.post(
     }
   })
 );
+
+//-----------------------------------  optimized login
+// router.post("/login-user", catchAsyncErrors(async (req, res, next) => {
+//   try {
+//     let e=await client.connect();
+//     console.error(e);
+//     const { email, password } = req.body;
+//     if (!email || !password) {
+//       return next(new ErrorHandler("Please provide all fields!", 400));
+//     }
+//     // Check if user is cached in Redis
+//     const cachedUser = await client.get(`user:${email}`);
+//     if (cachedUser) {
+//       const user = JSON.parse(cachedUser);
+//       const isPasswordValid = await user.comparePassword(password);
+//       if (!isPasswordValid) {
+//         return next(new ErrorHandler("Please provide correct information", 400));
+//       }
+//       sendToken(user, 201, res);
+//     } else {
+//       // User not cached, fetch from database and cache in Redis
+//       const user = await User.findOne({ email }).select("+password");
+//       if (!user) {
+//         return next(new ErrorHandler("User doesn't exist!", 400));
+//       }
+//       await client.set(`user:${email}`, JSON.stringify(user));
+//       const isPasswordValid = await user.comparePassword(password);
+//       if (!isPasswordValid) {
+//         return next(new ErrorHandler("Please provide correct information", 400));
+//       }
+//       sendToken(user, 201, res);
+//     }
+//   } catch (error) {
+//     return next(new ErrorHandler(error.message, 500));
+//   }
+// }));
+
 
 // load user
 // getting error flagged for check

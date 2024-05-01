@@ -157,3 +157,121 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
+
+// import React, { useState } from "react";
+// import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+// import styles from "../../styles/styles";
+// import { Link, useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import { server } from "../../server";
+// import { toast } from "react-toastify";
+// import {
+//   MDBBtn,
+//   MDBContainer,
+//   MDBCard,
+//   MDBCardBody,
+//   MDBCardImage,
+//   MDBRow,
+//   MDBCol,
+//   MDBIcon,
+//   MDBInput
+// }
+// from 'mdb-react-ui-kit';
+
+// const Login = () => {
+//   const navigate = useNavigate();
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [visible, setVisible] = useState(false);
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     try {
+//       const res = await axios.post(
+//         `${server}/user/login-user`,
+//         {
+//           email,
+//           password,
+//         },
+//         { withCredentials: true }
+//       );
+
+//       toast.success("Login Success!");
+//       navigate("/");
+//       window.location.reload(true);
+//     } catch (err) {
+//       //toast.error(err);
+//       toast.error(err.response.data.message);
+//     }
+//   };
+
+//   return (
+//     <MDBContainer className="my-5">
+
+//     <MDBCard>
+//       <MDBRow className='g-0'>
+
+//         <MDBCol md='6'>
+//           <MDBCardImage src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp' alt="login form" className='rounded-start w-100'/>
+//         </MDBCol>
+
+//         <MDBCol md='6'>
+//         <form  onSubmit={handleSubmit}>
+//           <MDBCardBody className='d-flex flex-column'>
+
+//             <div className='d-flex flex-row mt-2'>
+//               <MDBIcon fas icon="cubes fa-3x me-3" style={{ color: '#ff6219' }}/>
+//               <span className="h1 fw-bold mb-0">Happy Home</span>
+//             </div>
+
+//             <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>Sign into your account</h5>
+
+//               <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg" 
+              
+//                                  name="email"
+//                                  autoComplete="email"
+//                                  required
+//                                  value={email}
+//                                  onChange={(e) => setEmail(e.target.value)}/>
+//               <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"
+             
+//                                 name="password"
+//                                  autoComplete="current-password"
+//                                  required
+//                                  value={password}
+//                                  onChange={(e) => setPassword(e.target.value)}/>
+
+//             <MDBBtn className="mb-4 px-5" color='dark' size='lg' style={{borderRadius:'20px'}} type="submit">Login</MDBBtn>
+//             <a className="small text-muted" href="forgot-password">Forgot password?</a>
+//             <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Don't have an account? <a href="#!" style={{color: '#393f81'}}>
+              
+//             <Link to="/sign-up" className="text-blue-600 pl-2">
+//             Register here
+//               </Link>
+//               </a></p>
+
+//             <div className='d-flex flex-row justify-content-start'>
+//               <a href="#!" className="small text-muted me-1">Terms of use.</a>
+//               <a href="#!" className="small text-muted">Privacy policy</a>
+//             </div>
+
+//           </MDBCardBody>
+//           </form>
+//         </MDBCol>
+
+//       </MDBRow>
+//     </MDBCard>
+
+//   </MDBContainer>
+//   );
+// };
+
+// export default Login;
+
+
+
+// // new login page designing

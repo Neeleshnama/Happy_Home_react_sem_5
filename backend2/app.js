@@ -14,7 +14,8 @@ app.use(cors({
   origin: ['http://localhost:3000',],
   credentials: true
 }));
-
+const swaggerjsdoc=require('swagger-jsdoc');
+const swaggerui = require('swagger-ui-express');
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
@@ -67,7 +68,29 @@ app.use("/api/v2/product", product);
 app.use("/api/v2/payment", payment);
 app.use("/api/v2/event", event);
 app.use("/api/v2/coupon", coupon);
+
+
+const options = {
+  definition :{
+    openapi:"3.0.0",
+    info:{
+    title:"Happy Home Api documentation",
+    version:"3.0.0"
+    },
+    servers:[
+      {
+        url: "http://localhost:8000/api/v2"
+      },
+
+    ]
+  },
+  apis:["./routes/*.js"]
+};
 // it's for ErrorHandling
+const spacs= swaggerjsdoc(options);
+app.use("/api-docs",
+swaggerui.serve,
+swaggerui.setup(spacs));
 app.use(ErrorHandler);
 
 module.exports = app;

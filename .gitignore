@@ -19,5 +19,5 @@ build
 .vercel
 .firebaserc
 firebase.json
-
+backend2/logs
 

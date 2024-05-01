@@ -17,6 +17,8 @@ import { useSelector } from "react-redux";
 import Cart from "../cart/Cart";
 import Wishlist from "../Wishlist/Wishlist";
 import { RxCross1 } from "react-icons/rx";
+import Login from "../Login/Login";
+import Modal from "./Modal";
 
 const Header = ({ activeHeading }) => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -31,7 +33,15 @@ const Header = ({ activeHeading }) => {
   const [openCart, setOpenCart] = useState(false);
   const [openWishlist, setOpenWishlist] = useState(false);
   const [open, setOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
   const handleSearchChange = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
@@ -311,7 +321,7 @@ const Header = ({ activeHeading }) => {
               <br />
               <br />
 
-              <div className="flex w-full justify-center">
+              {/* <div className="flex w-full justify-center">
                 {isAuthenticated ? (
                   <div>
                     <Link to="/profile">
@@ -338,7 +348,38 @@ const Header = ({ activeHeading }) => {
                     </Link>
                   </>
                 )}
-              </div>
+              </div> */}
+
+
+
+
+
+<div className="flex w-full justify-center">
+      {isAuthenticated ? (
+        <div>
+          <Link to="/profile">
+            <img
+              src={`${user.avatar?.url}`}
+              alt=""
+              className="w-[60px] h-[60px] rounded-full border-[3px] border-[#0eae88]"
+            />
+          </Link>
+        </div>
+      ) : (
+        <>
+          <span
+            onClick={openModal}
+            className="text-[18px] pr-[10px] text-[#000000b7] cursor-pointer"
+          >
+            Login /
+          </span>
+          {/* <Link to="/sign-up" className="text-[18px] text-[#000000b7]">
+            Sign up
+          </Link> */}
+        </>
+      )}
+      <Modal isOpen={showModal} onClose={showModal}/>
+    </div>
             </div>
           </div>
         )}
