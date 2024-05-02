@@ -384,8 +384,8 @@ router.put('/approve-seller/:id',
 
 
 // Fetch all verified sellers
-router.get('/verified',isAuthenticated,
-isAdmin("Admin"), async (req, res) => {
+router.get('/verified',
+ async (req, res) => {
   try {
     const sellers = await Shop.find({ verified: true });
     res.json(sellers);
@@ -395,10 +395,18 @@ isAdmin("Admin"), async (req, res) => {
 });
 
 // Fetch all not verified sellers
-router.get('/notverified',isAuthenticated,
-isAdmin("Admin"), async (req, res) => {
+router.get('/notverified', async (req, res) => {
   try {
     const sellers = await Shop.find({ verified: false });
+    res.json(sellers);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get('/all', async (req, res) => {
+  try {
+    const sellers = await Shop.find();
     res.json(sellers);
   } catch (error) {
     res.status(500).json({ message: error.message });
