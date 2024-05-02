@@ -58,6 +58,7 @@ const payment = require("./controller/payment");
 const order = require("./controller/order");
 const event = require("./controller/event");
 const coupon = require("./controller/coupounCode");
+const withdraw = require("./controller/withdraw");
 const { timeStamp } = require("console");
 
 app.use("/api/v2/order", order);
@@ -68,7 +69,7 @@ app.use("/api/v2/product", product);
 app.use("/api/v2/payment", payment);
 app.use("/api/v2/event", event);
 app.use("/api/v2/coupon", coupon);
-
+app.use("/api/v2/withdraw", withdraw);
 
 const options = {
   definition :{
